@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,8 +21,8 @@ import com.digisprint.Event_Management1.Model.User;
 import com.digisprint.Event_Management1.Repository.UserRepository;
 
 @Service
-
-public class UserService{
+@Transactional
+public class UserService implements UserService1{
 
 
 	private UserRepository userRepository;
@@ -79,11 +80,17 @@ public class UserService{
 	}
 	
 	
+	/*
+	 * public void deleteStudent(int id) {
+	 * 
+	 * userRepository.deleteById(id); System.out.println("Coming"); }
+	 * 
+	 */	
+	@Override
 	public void deleteStudent(int id) {
-		
 		userRepository.deleteById(id);
-		System.out.println("Coming");
 	}
+	
 	
 	public String displayUser(ModelMap model) {
 	    // TODO Auto-generated method stub

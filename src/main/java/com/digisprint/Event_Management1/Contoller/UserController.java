@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.digisprint.Event_Management1.Model.User;
 import com.digisprint.Event_Management1.Repository.UserRepository;
@@ -97,21 +99,18 @@ public class UserController {
 	  
 		
 		 
-		/*
-		 * @PostMapping("/deleteuser1/{id}") public ModelAndView
-		 * delete(@PathVariable("id") int id) {
-		 * 
-		 * userService.deleteStudent(id); return new ModelAndView("viewuser");
-		 * 
-		 * }
-		 */
-	  
-	  @DeleteMapping("/delete/ {id}")
 		
-		public String Delete(@PathVariable (name="id") int id) {
-			userService.deleteStudent(id);
-			return "viewuser";
-		}
+	  
+	  
+	  
+	  @RequestMapping(value="/user/deleteStudent/{id}", method=RequestMethod.GET)
+		 public ModelAndView delete(@PathVariable("id") int id) {
+			 
+		  userService.deleteStudent(id);
+		  return new ModelAndView("redirect:/viewuser");
+		  
+		 }
+		
 		 
 	  
 	  @GetMapping("/viewuser")

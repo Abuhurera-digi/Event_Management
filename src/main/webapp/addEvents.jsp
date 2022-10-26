@@ -14,6 +14,7 @@
 <form action="event" method="post">
 
  Event ID:<input type="number" name="event_id" placeholder="Event Id" required="required"> <br> <br>
+ 
 Event Name:<input type="text" name="event_name" placeholder="Event Name"> <br> <br>
 Event Venue:<input type="text" name="event_venue" placeholder="Event Venue" required="required"> <br> <br>
 Event Date<input type="date" name="event_date" placeholder="Event Date" required="required"> <br> <br>

@@ -126,7 +126,7 @@ height: 100%;
 </div>
 
 <div class="abu">
- <form action="Event" > 
+ <form action="Event1" > 
  <input type="submit" value="viewEvent">
  </form>
 </div>

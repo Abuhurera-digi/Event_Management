@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
 @Service
 
-public class EventService {
+public class EventService implements EventService1 {
 
 	
 	@Autowired
@@ -80,21 +80,43 @@ public class EventService {
 		
 	}
 
-	
+	//deleting 
+	@Override
 	public void deleteEvent(int id) {
 		eventRepository.deleteById(id);
 	}
 	
+	
 		
 	
-	
-	public String displayDoctor(ModelMap model) {
+	//fectching
+	public String displayEvent(ModelMap model) {
 	    // TODO Auto-generated method stub
-	      List<Event> doctor =new ArrayList<Event>();
-	     eventRepository.findAll().forEach(i->doctor.add(i));
-	     model.addAttribute("result", doctor);
+	      List<Event> list =new ArrayList<Event>();
+	     eventRepository.findAll().forEach(i->list.add(i));
+	     model.addAttribute("result", list);
 	    
 	     return "ViewEvents";
 	}
+	
+	public String displayEvent1(ModelMap model) {
+	    // TODO Auto-generated method stub
+	      List<Event> list =new ArrayList<Event>();
+	     eventRepository.findAll().forEach(i->list.add(i));
+	     model.addAttribute("result", list);
+	    
+	     return "userViewEvent";
+	}
+
+//updateing
+	@Override
+	public Event getEventById(int id) {
+		return eventRepository.findById(id).get();
+	}
+
+
+
+
+	
 
 }
