@@ -108,7 +108,7 @@ height: 100%;
  
  
   <a href="password.jsp">Change the Password</a>
-  <a href="forpassword.jsp">Forgot Password</a>
+  
   <a href="about.jsp">about</a>
   <a href="contact.jsp">Contact Details</a>
   <a href="logout.jsp">logout</a>

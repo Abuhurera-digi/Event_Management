@@ -105,7 +105,7 @@ left: 50%;
 <center>
 
 <h1> All Event:</h1>
-<form modelAttribute="eventForm" method="GET" >
+<form modelAttribute="eventForm" method="POST" >
 
 
 

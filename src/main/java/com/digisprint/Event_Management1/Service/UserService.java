@@ -87,7 +87,7 @@ public class UserService implements UserService1{
 	 * 
 	 */	
 	@Override
-	public void deleteStudent(int id) {
+	public void deleteEvent(int id) {
 		userRepository.deleteById(id);
 	}
 	

@@ -22,6 +22,7 @@ height: 100%;
   Phone Number:<input type="text" name="phoneno" placeholder="Enter your Phone number"> <br> <br>
    Password:  <input type="password" name="password" placeholder="Enter your password"> <br> <br>
   <input type="submit" value="login"> <br> <br>
+  <a href="forpassword.jsp">Forgot Password</a>
   </form>
    <form action="Create">
   <input type="submit" value="Create New Account">

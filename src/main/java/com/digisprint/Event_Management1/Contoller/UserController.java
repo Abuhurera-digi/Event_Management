@@ -89,7 +89,7 @@ public class UserController {
 		  System.out.println(user2);
 		  if(Objects.nonNull(user2))
 		  {
-			  return "viewpassword";
+			  return "UserRegister";
 		  }
 		  else {
 			  return "forpassword";
@@ -106,7 +106,7 @@ public class UserController {
 	  @RequestMapping(value="/user/deleteStudent/{id}", method=RequestMethod.GET)
 		 public ModelAndView delete(@PathVariable("id") int id) {
 			 
-		  userService.deleteStudent(id);
+		  userService.deleteEvent(id);
 		  return new ModelAndView("redirect:/viewuser");
 		  
 		 }

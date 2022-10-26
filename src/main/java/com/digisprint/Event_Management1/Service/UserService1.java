@@ -4,7 +4,7 @@ import com.digisprint.Event_Management1.Model.Event;
 
 public interface UserService1 {
 	
-	 public void deleteStudent(int id);
+	 public void deleteEvent(int id);
 	
 
 }
