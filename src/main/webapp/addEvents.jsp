@@ -11,7 +11,7 @@
  <h1>Add Event</h1>
 <fieldset style="width: 600px">
 
-<form action="event" method="post">
+<form action="/event" method="post">
 
  Event ID:<input type="number" name="event_id" placeholder="Event Id" required="required"> <br> <br>
  

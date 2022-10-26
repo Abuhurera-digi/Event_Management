@@ -107,16 +107,10 @@ public class EventService implements EventService1 {
 	    
 	     return "userViewEvent";
 	}
-
 //updateing
 	@Override
 	public Event getEventById(int id) {
 		return eventRepository.findById(id).get();
 	}
-
-
-
-
 	
-
 }

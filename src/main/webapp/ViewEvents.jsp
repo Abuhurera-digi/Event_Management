@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -103,12 +104,12 @@ left: 50%;
 
 <center>
 
-
-
-
-
-
 <h1> All Event:</h1>
+<form modelAttribute="eventForm" method="GET" >
+
+
+
+
 <fieldset style="width: 1000px">
 
 
@@ -146,19 +147,15 @@ left: 50%;
 
 
 
-
-
 <c:forEach items="${result}" var="event">  
   <tr>
     <td>${event.event_id}</td>
     <td>${event.event_name}</td>  
-
     <td>${event.event_venue}</td>
     <td>${event.event_date}</td>
    
     <td>${event.start_time}</td>
     <td>${event.end_time}</td>
-
     <td>${event.description}</td>
     <td>${event.event_guest}</td>
     <td>${event.photo}</td>
@@ -179,10 +176,9 @@ left: 50%;
 
 
 
-
-
 </tbody>
 </table>
+</fieldset></form>
 
 
 </html>
