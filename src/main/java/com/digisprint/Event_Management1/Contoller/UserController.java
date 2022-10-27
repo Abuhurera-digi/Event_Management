@@ -2,6 +2,7 @@ package com.digisprint.Event_Management1.Contoller;
 
 import java.util.Objects;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,9 +24,11 @@ import com.digisprint.Event_Management1.Service.UserService;
 
 public class UserController {
 
-	private UserRepository repository;
+		private UserRepository repository;
 	private UserService userService;
 	AdminService adminService;
+	
+	
 
 	public UserController(UserRepository repository, UserService userService,AdminService adminService) {
 		this.repository = repository;
@@ -135,8 +138,36 @@ public class UserController {
          return "Pofile";
           
       }
-	 
 	  
+	  
+	  //update password
+	  @PostMapping("/changepass")
+	  public String  changePassword(@ModelAttribute ("user") User user)
+	  {
+		  User user2 = userService.changepassword(user.getPassword());
+		  System.out.println(user2);
+		  if(Objects.nonNull(user2))
+		  {
+			  return "UserRegister";
+		  }
+		  else {
+			  return "password";
+		  }
+		  
+	  }
+	  
+		/*
+		 * @PostMapping("/changepassword1") public String changePassword1(@RequestParam
+		 * ("password") String password , User user) {
+		 * 
+		 * System.out.println("password"+password); String username= user.getName();
+		 * User currentUser= this.repository.getUserByName(username);
+		 * //System.out.println(currentUser.getPassword());
+		 * 
+		 * 
+		 * return "Register_success"; }
+		 * 
+		 */
 	
 
 }

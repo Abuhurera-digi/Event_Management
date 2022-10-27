@@ -110,4 +110,17 @@ public class UserService implements UserService1{
 	    
 	     //return "pofile";
 	}
+	
+	//update password
+	
+	public User changepassword( String password) {
+		
+		List <User> list = new ArrayList<>();
+		return userRepository.findByPassword(password);
+		
+		
+		
+	}
+
+	
 }
