@@ -36,8 +36,10 @@ public class EventService implements EventService1 {
 
 	public void insert(HttpServletRequest request) throws ParseException {
 		Event event = new Event();
-		int id=Integer.parseInt(request.getParameter("event_id"));
-		event.setEvent_id(id);
+		
+		  int id=Integer.parseInt(request.getParameter("event_id"));
+		  event.setEvent_id(id);
+		 
 		event.setEvent_name(request.getParameter("event_name"));
 		event.setEvent_venue(request.getParameter("event_venue"));
 

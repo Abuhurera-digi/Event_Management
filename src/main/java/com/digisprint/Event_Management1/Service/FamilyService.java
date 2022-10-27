@@ -21,8 +21,9 @@ public class FamilyService {
 	
 	public void insert(HttpServletRequest request) throws ParseException {
 		family fam = new family();
-		int id=Integer.parseInt(request.getParameter("id"));
-		fam.setid(id);
+		
+		 // int id=Integer.parseInt(request.getParameter("id")); fam.setid(id);
+		 
 		fam.setFamilyname(request.getParameter("familyname"));
 		fam.setAddress(request.getParameter("address"));
 		

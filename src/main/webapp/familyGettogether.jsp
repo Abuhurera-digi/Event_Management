@@ -12,7 +12,7 @@
 
 <h1>Register here</h1>
 <form action="familyinsert" method="post">
-ID:<input type="number" name="id" required="required" placeholder="id"> <br> <br>
+
 Family Name:<input type="text" name="familyname" placeholder="Family name" required="required"> <br> <br>
 Address:<input type="text" name="address" placeholder="Enter your Address" required="required"> <br> <br>
 Number Of Attendees:<input type="number" name="no_of_attendees" placeholder="Number Of Attendees" required="required"> <br> <br>

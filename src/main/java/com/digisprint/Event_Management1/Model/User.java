@@ -18,9 +18,10 @@ import lombok.Setter;
 @Data
 public class User {
 	
-	//@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	@Column
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Column
 	private String name;

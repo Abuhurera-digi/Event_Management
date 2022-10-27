@@ -32,7 +32,7 @@ public class UserService implements UserService1{
 		this.userRepository = userRepository;
 	}
 
-	public void viewDetails(@RequestParam("id") int id,
+	public void viewDetails(
 			@RequestParam("name") String name,
 			@RequestParam("email_id")  String email_id ,
 			@RequestParam("college_name") String college_name,
@@ -43,8 +43,6 @@ public class UserService implements UserService1{
 			@RequestParam("gender") String gender
 			, ModelMap modelMap){ 
 		User user=new User();
-		int id1 = Integer.valueOf(id);
-		user.setId(id1);
 		user.setName(name);
 		user.setEmail_id(email_id);
 		user.setCollege_name(college_name);
@@ -102,15 +100,6 @@ public class UserService implements UserService1{
 	}
 	
 	
-	public void yourProfile(ModelMap model,  String phoneno, String password) {
-	    // TODO Auto-generated method stub
-	      List<User>list=new ArrayList<User>();
-	     userRepository.findByPhonenoAndPassword(phoneno, password);
-	     model.addAttribute("result", list);
-	    
-	     //return "pofile";
-	}
-	
 	//update password
 	
 	public User changepassword( String password) {
@@ -122,5 +111,8 @@ public class UserService implements UserService1{
 		
 	}
 
-	
+	public void updatePassword(	String password,String username, String phoneno) {
+		
+		 userRepository.updatepassword(password,username, phoneno);
+	}
 }

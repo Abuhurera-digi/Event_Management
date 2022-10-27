@@ -26,7 +26,7 @@ public class birthdayService {
 	
 	
 	public void birthInsert(
-			@RequestParam("id")int id,
+			//@RequestParam("id")int id,
 			@RequestParam("name_of_child") String name_of_child,
 			@RequestParam("date_of_birth")  Date date_of_birth ,
 			@RequestParam("venue") String venue,
@@ -38,7 +38,7 @@ public class birthdayService {
 			, ModelMap modelMap)
 	{
 		birthday birthday=new birthday();
-		birthday.setId(id);
+		//birthday.setId(id);
 		birthday.setName_of_child(name_of_child);
 		//Date Date = birthday.getDate_of_birth();
 		birthday.setDate_of_birth(date_of_birth);
@@ -56,7 +56,7 @@ public class birthdayService {
 		this.birthdayRepository.save(birthday);
 		
 		
-	modelMap.put("id", id);
+	//modelMap.put("id", id);
 	modelMap.put("name_of_child",name_of_child );
 	modelMap.put("date_of_birth", date_of_birth);
 	modelMap.put("venue", venue);

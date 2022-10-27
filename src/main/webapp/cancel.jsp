@@ -9,7 +9,7 @@
 <body>
 
 <form action="Hurera" method="post">
-ID:<input type="number" name="id" placeholder="Enter your id" required="required" >
+
 <input type="submit" value="submit">
  </form>
 </body>

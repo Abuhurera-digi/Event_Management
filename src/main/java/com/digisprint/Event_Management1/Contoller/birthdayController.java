@@ -39,7 +39,7 @@ public class birthdayController {
 	
 	
 	@PostMapping("/birthBook")
-	public String InsertDetails(@RequestParam("id") int id,@RequestParam("name_of_child") String name_of_child,
+	public String InsertDetails(@RequestParam("name_of_child") String name_of_child,
 			@RequestParam("date_of_birth")  Date date_of_birth ,
 			@RequestParam("venue") String venue,
 			@RequestParam("date_of_arrival" ) Date date_of_arrival,
@@ -49,7 +49,7 @@ public class birthdayController {
 			@RequestParam("cake") String cake
 			, ModelMap modelMap){ 
 		
-		birthdayService.birthInsert(id, name_of_child, date_of_birth, venue, date_of_arrival, date_of_departure, Decoration, material, cake, modelMap);
+		birthdayService.birthInsert( name_of_child, date_of_birth, venue, date_of_arrival, date_of_departure, Decoration, material, cake, modelMap);
 		return "birthdayRegistersuccess";
 	}
 		

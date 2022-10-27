@@ -12,7 +12,7 @@
 <h1>Register Here</h1>
 
 <form action="companybook" method="post">
-UserId: <input type="number" name="userid"> <br> <br>
+
 Organization Name:<input type="text" name="organization_name" placeholder="Organization Name" required="required"> <br> <br>
 Organizer Name:<input type="text" name="organizer_name" placeholder="Organizer Name" required="required"> <br> <br>
 Number Of Attendees:<input type="number" name="no_of_attendees" placeholder="Number Of Attendees" required="required"> <br> <br>

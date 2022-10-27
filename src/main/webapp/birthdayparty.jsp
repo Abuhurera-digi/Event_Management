@@ -9,11 +9,13 @@
 <body>
 
 
+
 <center>
+<h1>Register here </h1>
 <fieldset style="width:600px">
 
 <form action="birthBook" method="post">
-ID: <input type="number" name="id" placeholder="Enter your id"required="required"> <br> <br>
+
 Child_Name<input type="text" name="name_of_child" placeholder="Enter the name of child" required="required" > <br> <br>
 Date_Of_Birth<input type="date" name="date_of_birth" placeholder="Enter your Date of birth" required="required"> <br> <br>
 

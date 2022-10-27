@@ -23,8 +23,10 @@ public class CompanyService {
 	
 	public void insert(HttpServletRequest request) throws ParseException {
 		Company company = new Company();
-		int id=Integer.parseInt(request.getParameter("userid"));
-		company.setUserid(id);
+		/*
+		 * int id=Integer.parseInt(request.getParameter("userid"));
+		 * company.setUserid(id);
+		 */
 		company.setOrganization_name(request.getParameter("organization_name"));
 		company.setOrganizer_name(request.getParameter("organizer_name"));
 		

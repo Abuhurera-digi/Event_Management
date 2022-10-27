@@ -15,8 +15,8 @@ import javax.persistence.Table;
 public class birthday {
 	
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
-	 private  int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	 private  int b_Id;
 	 private String name_of_child;  
 	 private Date date_of_birth;
 	 private String venue;
@@ -34,10 +34,10 @@ public class birthday {
 		return name_of_child;
 	}
 	public int getId() {
-		return id;
+		return b_Id;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.b_Id = id;
 	}
 	public void setName_of_child(String name_of_child) {
 		this.name_of_child = name_of_child;
@@ -87,7 +87,7 @@ public class birthday {
 	}
 	@Override
 	public String toString() {
-		return "birthday [id=" + id + ", name_of_child=" + name_of_child + ", date_of_birth=" + date_of_birth
+		return "birthday [id=" + b_Id + ", name_of_child=" + name_of_child + ", date_of_birth=" + date_of_birth
 				+ ", venue=" + venue + ", date_of_arrival=" + date_of_arrival + ", date_of_departure="
 				+ date_of_departure + ", Decoration=" + Decoration + ", material=" + material + ", cake=" + cake + "]";
 	}

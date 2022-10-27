@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>welcome</h1>
+
 
 <center>
 
@@ -28,6 +28,8 @@
 <thead>
 <tr>
 <th >Id</th>
+
+<th >Name</th>
 
 
 
@@ -53,23 +55,16 @@
 
 
 
-<c:forEach items="${result}" var="x">  
+
   <tr>
-    <td>${x.id}</td>
-    
-
-    <td>${x.email_id}</td>
-   
-   
-    <td>${x.phoneno}</td>
-   
-
-    <td>${x.gender}</td>
-    
-    
+    <td>${user.id}</td>
+    <td>${user.name}</td>
+    <td>${user.email_id}</td>
+     <td>${user.phoneno}</td>
+    <td>${user.gender}</td>
+    </tr>
      
-    
-</c:forEach>
+
 
 
 

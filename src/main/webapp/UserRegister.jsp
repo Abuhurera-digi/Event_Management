@@ -17,7 +17,7 @@ background-color: #87CEEB;
 <fieldset style="width:600px">
 
  <form action="Register" method="post">
-  Id: <input type="number" name="id"> <br> <br>
+ 
   Name:  <input type="text" name="name" placeholder="name">  <br> <br>
   Email_id:  <input type="text" name="email_id" placeholder="Email_id"> <br> <br>
   College_Name: <input type="text" name="college_name"placeholder="College name"> <br> <br>

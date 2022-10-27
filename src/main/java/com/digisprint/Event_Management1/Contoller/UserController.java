@@ -3,6 +3,7 @@ package com.digisprint.Event_Management1.Contoller;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +21,7 @@ import com.digisprint.Event_Management1.Repository.UserRepository;
 import com.digisprint.Event_Management1.Service.AdminService;
 import com.digisprint.Event_Management1.Service.UserService;
 
+
 @Controller
 
 public class UserController {
@@ -28,7 +30,7 @@ public class UserController {
 	private UserService userService;
 	AdminService adminService;
 	
-	
+	 User user1; 	
 
 	public UserController(UserRepository repository, UserService userService,AdminService adminService) {
 		this.repository = repository;
@@ -41,7 +43,7 @@ public class UserController {
 
 		return "index";
 	}
-
+ 
 	@GetMapping("/User1")
 	public String Get() {
 		return "UserLogin";
@@ -54,14 +56,14 @@ public class UserController {
 	}
 
 	@PostMapping("/Register")
-	public String InsertDetails( @RequestParam("id") int id,@RequestParam("name") String name, @RequestParam("email_id") String email_id,
+	public String InsertDetails( @RequestParam("name") String name, @RequestParam("email_id") String email_id,
 			@RequestParam("college_name") String college_name, @RequestParam("phoneno") String phoneno,
 			@RequestParam("password") String password,
 			//@RequestParam("passConfirm") String passConfirm,
 
 			@RequestParam("Gender") String gender, ModelMap modelMap) {
 
-		userService.viewDetails(id,name, email_id, college_name, phoneno, password, gender,   modelMap);
+		userService.viewDetails(name, email_id, college_name, phoneno, password, gender,   modelMap);
 		return "Register_success";
 
 	}
@@ -70,8 +72,8 @@ public class UserController {
 	  @PostMapping("/login")
 	  public String login(@ModelAttribute ("user") User user) 
 	  {
-		  User user1 = userService.login(user.getPhoneno(), user.getPassword());
-		  System.out.println(user1);
+		  user1 = userService.login(user.getPhoneno(), user.getPassword());
+		  System.out.println("user1"+user1);
 		  if(Objects.nonNull(user1))
 		  {
 			  return "login-success";
@@ -92,7 +94,7 @@ public class UserController {
 		  System.out.println(user2);
 		  if(Objects.nonNull(user2))
 		  {
-			  return "UserRegister";
+			  return "changePassword";
 		  }
 		  else {
 			  return "forpassword";
@@ -123,18 +125,15 @@ public class UserController {
         return userService.displayUser(model);
           
       }
-		/*
-		 * @GetMapping("/deleteuser") public String detlete() { return
-		 * "admindeleteuser";
-		 * 
-		 * 
-		 * }
-		 */
+		 
+	  
+	  //your profile
 	  @GetMapping("/yourprofile")
-      public String yourProfile(ModelMap model,  String phoneno,String password) {
+      public String yourProfile(ModelMap model) {
         
-        
-         userService.yourProfile(model,  phoneno, password);
+       
+        model.put("user", user1);
+
          return "Pofile";
           
       }
@@ -148,7 +147,7 @@ public class UserController {
 		  System.out.println(user2);
 		  if(Objects.nonNull(user2))
 		  {
-			  return "UserRegister";
+			  return "changePassword";
 		  }
 		  else {
 			  return "password";
@@ -156,18 +155,24 @@ public class UserController {
 		  
 	  }
 	  
+		
 		/*
 		 * @PostMapping("/changepassword1") public String changePassword1(@RequestParam
-		 * ("password") String password , User user) {
+		 * ("password") String password , @RequestParam("phoneno") String phoneno, User
+		 * user) {
 		 * 
-		 * System.out.println("password"+password); String username= user.getName();
-		 * User currentUser= this.repository.getUserByName(username);
+		 * user.setPassword(password);
+		 * 
+		 * System.out.println("password"+password); String password1=user.getPassword();
+		 * String username= user.getName(); User currentUser=
+		 * this.repository.getUserByName(username);
+		 * userService.updatePassword(password1, username, phoneno);
 		 * //System.out.println(currentUser.getPassword());
 		 * 
 		 * 
 		 * return "Register_success"; }
-		 * 
 		 */
+		 
 	
 
 }
