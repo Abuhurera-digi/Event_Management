@@ -6,5 +6,6 @@ public interface EventService1
 {
 	 public Event getEventById(int id);
 	 public void deleteEvent(int id);
+	
 
 }

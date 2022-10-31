@@ -74,5 +74,86 @@
 </tbody>
 </table>
 
+
+<table border = "1" width = "100%">
+<thead>
+<tr>
+<th >Id</th>
+
+<th >Name</th>
+
+
+
+<th>Date Of Birth</th>
+
+
+
+<th>Venue</th>
+
+
+
+<th>date_of_arrival</th>
+
+
+
+<th>date_of_departure</th>
+
+<th>decoration</th>
+
+<th>material</th>
+<th>Cake</th>
+<th>Phone number</th>
+
+
+</tr>
+</thead>
+
+
+
+
+
+
+
+
+
+
+<tbody>
+
+
+
+
+ <c:forEach items="${birthday}" var="birthday" >
+
+   <tr>
+    <td>${birthday.b_Id}</td>
+     <td>${birthday.name_of_child}</td>
+     <td>${birthday.date_of_birth}</td>
+     <td>${birthday.venue}</td>
+     <td>${birthday.date_of_arrival}</td>
+     <td>${birthday.date_of_departure}</td>
+     <td>${birthday.decoration}</td>
+     <td>${birthday.material}</td>
+     <td>${birthday.cake}</td>
+     <td>${birthday.phoneno}</td>
+      <td>
+       <spring:url value="/birthday/cancleEvent/${birthday.phoneno}" var="deleteURL" />
+       <a class="btn btn-danger" href="${deleteURL}" role="button" >Cancle</a>
+      </td>
+    
+    
+    </tr>
+  
+
+
+
+
+
+
+</c:forEach>
+</tbody>
+</table>
+
+
+
 </body>
 </html>

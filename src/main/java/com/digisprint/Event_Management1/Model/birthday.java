@@ -4,6 +4,7 @@ package com.digisprint.Event_Management1.Model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,33 +12,39 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="birthday")
 public class birthday {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column
 	 private  int b_Id;
+	@Column
 	 private String name_of_child;  
+	@Column
 	 private Date date_of_birth;
+	@Column
 	 private String venue;
+	@Column
 	 private Date date_of_arrival;
+	@Column
 	 private Date date_of_departure; 
-	 private String Decoration;
+	@Column
+	 private String decoration;
+	@Column
 	 private String material;
+	@Column
 	 private String cake;
-
-	    
-	 
-	 
-	 
-	public String getName_of_child() {
-		return name_of_child;
-	}
-	public int getId() {
+	@Column
+	 private String phoneno;
+	public int getB_Id() {
 		return b_Id;
 	}
-	public void setId(int id) {
-		this.b_Id = id;
+	public void setB_Id(int b_Id) {
+		this.b_Id = b_Id;
+	}
+	public String getName_of_child() {
+		return name_of_child;
 	}
 	public void setName_of_child(String name_of_child) {
 		this.name_of_child = name_of_child;
@@ -67,10 +74,10 @@ public class birthday {
 		this.date_of_departure = date_of_departure;
 	}
 	public String getDecoration() {
-		return Decoration;
+		return decoration;
 	}
 	public void setDecoration(String decoration) {
-		Decoration = decoration;
+		this.decoration = decoration;
 	}
 	public String getMaterial() {
 		return material;
@@ -78,22 +85,24 @@ public class birthday {
 	public void setMaterial(String material) {
 		this.material = material;
 	}
-	
 	public String getCake() {
 		return cake;
 	}
 	public void setCake(String cake) {
 		this.cake = cake;
 	}
+	public String getPhoneno() {
+		return phoneno;
+	}
+	public void setPhoneno(String phoneno) {
+		this.phoneno = phoneno;
+	}
 	@Override
 	public String toString() {
-		return "birthday [id=" + b_Id + ", name_of_child=" + name_of_child + ", date_of_birth=" + date_of_birth
+		return "birthday [b_Id=" + b_Id + ", name_of_child=" + name_of_child + ", date_of_birth=" + date_of_birth
 				+ ", venue=" + venue + ", date_of_arrival=" + date_of_arrival + ", date_of_departure="
-				+ date_of_departure + ", Decoration=" + Decoration + ", material=" + material + ", cake=" + cake + "]";
+				+ date_of_departure + ", decoration=" + decoration + ", material=" + material + ", cake=" + cake
+				+ ", phoneno=" + phoneno + "]";
 	}
-	
-	
-	
-	 
 
 }

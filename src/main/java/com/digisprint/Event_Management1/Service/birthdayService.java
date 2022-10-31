@@ -1,5 +1,6 @@
 package com.digisprint.Event_Management1.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,9 +33,10 @@ public class birthdayService {
 			@RequestParam("venue") String venue,
 			@RequestParam("date_of_arrival" ) Date date_of_arrival,
 			@RequestParam("date_of_departure") Date date_of_departure,
-			@RequestParam("Decoration") String Decoration,
+			@RequestParam("decoration") String decoration,
 			@RequestParam("material") String material,
-			@RequestParam("cake") String cake
+			@RequestParam("cake") String cake,
+			@RequestParam("phoneno") String phoneno
 			, ModelMap modelMap)
 	{
 		birthday birthday=new birthday();
@@ -46,10 +48,10 @@ public class birthdayService {
 		
 		birthday.setDate_of_arrival(date_of_arrival);
 		birthday.setDate_of_departure(date_of_departure);
-		birthday.setDecoration(Decoration);
+		birthday.setDecoration(decoration);
 		birthday.setMaterial(material);
 		birthday.setCake(cake);
-		
+		birthday.setPhoneno(phoneno);
 		
 		
 		
@@ -63,9 +65,10 @@ public class birthdayService {
 	modelMap.put("date_of_arrival", date_of_arrival);
 	modelMap.put("date_of_departure", date_of_departure);
 	
-	modelMap.put("Decoration", Decoration);
+	modelMap.put("decoration", decoration);
 	modelMap.put("material", material);
 	modelMap.put("cake", cake);
+	modelMap.put("phoneno", phoneno);
 	
 	}
 	
@@ -106,10 +109,23 @@ public class birthdayService {
 	 */
 
 	
-	public void cancle(int id) {
+	public void cancle(int b_id) {
 				
-		birthdayRepository.deleteById(id);
+		birthdayRepository.deleteById(b_id);
 	  System.out.println("delete");
 	}
-  
+//cancle
+	public void cancle(String phoneno) {
+		
+		birthdayRepository.deleteByPhoneno(phoneno);
+	}
+	
+	//getdetails book
+	
+	public List<birthday> delete(String phoneno){
+		
+		List<birthday> list = new ArrayList<>();
+		birthdayRepository.findAllByPhoneno(phoneno).forEach(x->list.add(x));
+		return list;
+	}
 }

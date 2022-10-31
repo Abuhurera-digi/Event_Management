@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,12 +45,13 @@ public class birthdayController {
 			@RequestParam("venue") String venue,
 			@RequestParam("date_of_arrival" ) Date date_of_arrival,
 			@RequestParam("date_of_departure") Date date_of_departure,
-			@RequestParam("Decoration") String Decoration,
+			@RequestParam("decoration") String decoration,
 			@RequestParam("material") String material,
-			@RequestParam("cake") String cake
+			@RequestParam("cake") String cake,
+			@RequestParam("phoneno") String phoneno
 			, ModelMap modelMap){ 
 		
-		birthdayService.birthInsert( name_of_child, date_of_birth, venue, date_of_arrival, date_of_departure, Decoration, material, cake, modelMap);
+		birthdayService.birthInsert( name_of_child, date_of_birth, venue, date_of_arrival, date_of_departure, decoration, material, cake, phoneno,modelMap);
 		return "birthdayRegistersuccess";
 	}
 		
@@ -108,4 +110,24 @@ public class birthdayController {
 	 * return "addEvents"; }
 	 */
 	
+	  @RequestMapping(value="/birthday/cancleEvent/{phoneno}",
+	  method=RequestMethod.GET) public ModelAndView cancle(@PathVariable("phoneno")
+	  String phoneno) {
+	  
+	  birthdayService.cancle(phoneno); System.out.println("Coming"); return new
+	  ModelAndView("/cancel-success");
+	  
+	  }
+	 
+	 
+	 
+	/*
+	 * @RequestMapping(value="/birthday/cancleEvent/{b_id}",
+	 * method=RequestMethod.GET) public ModelAndView cancle(@PathVariable("b_id")
+	 * int b_id) {
+	 * 
+	 * birthdayService.cancle(b_id); return new ModelAndView("/cancel-success");
+	 * 
+	 * }
+	 */
 }

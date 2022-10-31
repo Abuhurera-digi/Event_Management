@@ -114,5 +114,15 @@ public class EventService implements EventService1 {
 	public Event getEventById(int id) {
 		return eventRepository.findById(id).get();
 	}
-	
+	/*
+	 * public Boolean availabality(HttpServletRequest request){
+	 * 
+	 * List<Event> list = new ArrayList<>(); String status="";
+	 * eventRepository.findAll().forEach(x->list.add(x)); for(Event e:list) {
+	 * if(e.getEvent_date().equals(request.getParameter("date_of_arrival"))) {
+	 * return false; } break;
+	 * 
+	 * } return true; }
+	 */
+
 }

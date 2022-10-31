@@ -35,7 +35,7 @@ Date_Of_Birth<input type="date" name="date_of_birth" placeholder="Enter your Dat
 
 Date of arrival:<input type="date" name="date_of_arrival" placeholder="Date of arrival" required="required"> <br> <br>
 Date of departure:<input type="date" name="date_of_departure" placeholder="Date of departure" required="required"> <br> <br>
-Decoration:<input type="radio" name="Decoration" placeholder="Decoration" required="required" value="yes"> Yes</input> <br> <br>
+Decoration:<input type="radio" name="decoration" placeholder="Decoration" required="required" value="yes"> Yes</input> <br> <br>
 Material:<input type="radio" name="material" placeholder="Material" required="required" value="yes"> Yes</input> <br> <br>
 
 <tr>
@@ -54,6 +54,7 @@ Material:<input type="radio" name="material" placeholder="Material" required="re
        
     </select></td>
 </tr>
+<input type="number" name="phoneno">
 
 
 <input type="submit" value="Submit">

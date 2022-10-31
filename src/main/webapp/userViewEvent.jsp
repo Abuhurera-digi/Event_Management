@@ -19,6 +19,17 @@ position: absolute;
 top: 60%;
 left: 50%;
 }
+
+.abu{
+position: absolute;
+top: 3%;
+left: 70%;
+}
+
+
+
+
+}
 </style>
 </head>
 <body>
@@ -44,6 +55,11 @@ left: 50%;
  
  </center>
  
+<!--  </div>
+<div class="abu">
+ <input id="search-input" type="text" placeholder="Search your Event">
+</div> -->
+
  <%-- 
  <div class="birthday">
  <form action="deletebirthday">

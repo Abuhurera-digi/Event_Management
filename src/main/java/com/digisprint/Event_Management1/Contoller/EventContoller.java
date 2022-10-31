@@ -83,6 +83,16 @@ public class EventContoller {
 		  System.out.println("come"); model.setViewName("/addEvents");
 		  
 		  return model; }
+	  
+	/*
+	 * @PostMapping("/birthBook") public String check(HttpServletRequest request)
+	 * throws ParseException { String redirect="";
+	 * if(eventService.availabality(request)) { eventService.insert(request);
+	 * redirect="birthdayRegistersuccess"; } else {
+	 * System.out.println("noavailability"); redirect="birthdayRegisterError"; }
+	 * return redirect; } 
+	 */
 	
-	
-	 }
+	 
+	 
+}

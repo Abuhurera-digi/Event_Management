@@ -10,8 +10,9 @@
 <h1>Confirm Booking</h1>
 <h2>If you want cancel no refund  </h2>
 
-<form action="abu">
+<form action="abu/{phoneno}">
 <input type="submit" value="cancel">
+
 </form>
 </body>
 </html>

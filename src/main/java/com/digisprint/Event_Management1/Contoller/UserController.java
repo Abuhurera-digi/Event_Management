@@ -1,5 +1,7 @@
 package com.digisprint.Event_Management1.Contoller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.digisprint.Event_Management1.Model.User;
+import com.digisprint.Event_Management1.Model.birthday;
 import com.digisprint.Event_Management1.Repository.UserRepository;
+import com.digisprint.Event_Management1.Repository.birthdayRepository;
 import com.digisprint.Event_Management1.Service.AdminService;
 import com.digisprint.Event_Management1.Service.UserService;
 
@@ -27,6 +31,8 @@ import com.digisprint.Event_Management1.Service.UserService;
 public class UserController {
 
 		private UserRepository repository;
+		@Autowired
+		private birthdayRepository birthdayRepository;
 	private UserService userService;
 	AdminService adminService;
 	
@@ -107,7 +113,7 @@ public class UserController {
 		
 	  
 	  
-	  
+	  //delete
 	  @RequestMapping(value="/user/deleteStudent/{id}", method=RequestMethod.GET)
 		 public ModelAndView delete(@PathVariable("id") int id) {
 			 
@@ -133,6 +139,10 @@ public class UserController {
         
        
         model.put("user", user1);
+        List<birthday> list = new ArrayList<>();
+		birthdayRepository.findAllByPhoneno(user1.getPhoneno()).forEach(x->list.add(x));
+		System.out.println(list);
+        model.put("birthday", list);
 
          return "Pofile";
           
