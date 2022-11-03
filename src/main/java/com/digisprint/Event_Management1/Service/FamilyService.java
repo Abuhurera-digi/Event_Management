@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import com.digisprint.Event_Management1.Model.family;
 import com.digisprint.Event_Management1.Repository.FamilyRepository;
 
 @Service
+@Transactional
 public class FamilyService {
 
 	@Autowired
@@ -75,9 +77,9 @@ public class FamilyService {
 
 
 	//cancle bokk user
-	public void deleteBookedEvent(int b_id) {
+	public void deleteBookedEvent(String phoneno) {
 
-		familyRepository.deleteById(b_id);
+		familyRepository.deleteByPhoneno(phoneno);
 		System.out.println("Coming");
 	}
 

@@ -321,7 +321,7 @@
      <td>${family.date_of_departure}</td>
      <td>${family.phoneno}</td>
       <td>
-       <spring:url value="/birthday/cancleEvent/${family.phoneno}" var="deleteURL" />
+       <spring:url value="/family/cancleEvent/${family.phoneno}" var="deleteURL" />
        <a class="btn btn-danger" href="${deleteURL}" role="button" >Cancel</a>
       </td>
     

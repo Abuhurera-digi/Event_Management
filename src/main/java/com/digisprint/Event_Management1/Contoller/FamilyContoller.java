@@ -58,11 +58,11 @@ public class FamilyContoller {
 
 
 	//cancel booked user
-	@RequestMapping(value="/family/cancleEvent/{id}",
-			method=RequestMethod.GET) public ModelAndView cancleBooked(@PathVariable("id")
-			int id) {
+	@RequestMapping(value="/family/cancleEvent/{phoneno}",
+			method=RequestMethod.GET) public ModelAndView cancleBooked(@PathVariable("phoneno")
+			String  phoneno) {
 
-		familyService.deleteBookedEvent(id); 
+		familyService.deleteBookedEvent(phoneno); 
 		System.out.println("Coming");
 		return new ModelAndView("/cancel-success");
 

@@ -11,4 +11,5 @@ public interface FamilyRepository extends CrudRepository<family, Integer>{
 
 
 	public List<family> findAllByPhoneno(String phoneno);
+	public void deleteByPhoneno(String phoneno);
 }
