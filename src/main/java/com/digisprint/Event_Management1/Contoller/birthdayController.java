@@ -1,25 +1,19 @@
  package com.digisprint.Event_Management1.Contoller;
 import java.sql.Date;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import com.digisprint.Event_Management1.Model.birthday;
+
 import com.digisprint.Event_Management1.Repository.birthdayRepository;
 import com.digisprint.Event_Management1.Service.BirthdayService;
 @Controller
@@ -60,6 +54,7 @@ public class BirthdayController {
 	  @RequestMapping(value="/birthday/cancleEvent/{phoneno}",
 	  method=RequestMethod.GET) public ModelAndView cancle(@PathVariable("phoneno")
 	  String phoneno) {
+		  System.out.println("Vivek");
 	  
 	  birthdayService.cancle1(phoneno);
 	  return new ModelAndView("/cancel-success");
