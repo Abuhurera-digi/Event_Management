@@ -7,12 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<centre>
+<center>
+<fieldset style="width: 600px">
 
 <h1>Register Here</h1>
 
 <form action="companybook" method="post">
-
+<c:if test="${not empty error}">
+  <h4>${error}</h4>
+  </c:if>
 Organization Name:<input type="text" name="organization_name" placeholder="Organization Name" required="required"> <br> <br>
 Organizer Name:<input type="text" name="organizer_name" placeholder="Organizer Name" required="required"> <br> <br>
 Number Of Attendees:<input type="number" name="no_of_attendees" placeholder="Number Of Attendees" required="required"> <br> <br>
@@ -29,9 +32,9 @@ Phone no: <input type="number"name="phone_no" placeholder="Enter you phone numbe
 </form>
 
 
+</fieldset>
 
-
-</centre>
+</center>
 
 
 </body>

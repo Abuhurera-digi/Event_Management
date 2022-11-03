@@ -8,5 +8,6 @@
 </head>
 <body>
 <h1>Cancelled success!!!</h1>
+<a href="index.jsp">logout</a>
 </body>
 </html>

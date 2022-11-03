@@ -8,5 +8,6 @@
 </head>
 <body>
 <h1>Your Slot Booked  Successfully</h1>
+<a href="Pofile.jsp"><h2>If you want to cancel click here</h2></a>
 </body>
 </html>

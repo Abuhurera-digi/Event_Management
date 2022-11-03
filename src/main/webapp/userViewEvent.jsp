@@ -26,6 +26,11 @@ top: 3%;
 left: 70%;
 }
 
+.search{
+position: absolute;
+top: 5%;
+left: 85%
+}
 
 
 
@@ -122,8 +127,8 @@ left: 70%;
 <tbody>
 <c:forEach items="${result}" var="x">  
   <tr>
-    <td>${x.event_id}</td>
-    <td>${x.event_name}</td>  
+    <td>${x.id}</td>
+    <td>${x.eventname}</td>  
     <td>${x.event_venue}</td>
     <td>${x.event_date}</td>
    
@@ -131,13 +136,23 @@ left: 70%;
     <td>${x.end_time}</td>
     <td>${x.description}</td>
     <td>${x.event_guest}</td>
-    <td>${x.photo}</td>
+   <td>image             :</td> <td><img  src= "data:image/jpeg;base64,${x.base64photo}" style="width: 50px;height: 80px ;"/></img></td>
+      
     <td>  <a href="birthdayparty.jsp">book</a>   
     
    
      
     
 </c:forEach>
+
+
+
 </tbody>
 </table>
+<div class=search>
+<form action="/searchfriend" method="post" style="float:left">
+<input type="text" name="eventname" placeholder="Search Event Here">
+<input type="submit" value="search">
+</form>
+</div>
 </html>

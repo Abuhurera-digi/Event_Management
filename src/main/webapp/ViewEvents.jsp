@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -33,23 +32,19 @@ left: 50%;
 <h1>Select Your Event</h1>
 
  <a href="birthdayparty.jsp"><img src="/images/birthaday.jpg" height="200px" width="400px"></a> <br> <br>
-  <a href="birthdayparty.jsp">Book now</a>
   
  <p> <h2>Birthday Party</h2></p>
 
  
  <a href="marriageparty.jsp"> <img src="/images/marriage-party.jpg" height="200px" width="400px"></a> <br> <br>
- <a href="marriageparty.jsp">Book now</a>
  <p> <h2>Marriage Party</h2></p>
  
  
  <a href="companyParty.jsp"> <img  src="/images/company-party.jpeg" height="200px" width="400px"> </a> <br> <br>
-  <a href="companyParty.jsp">Book now</a>
  <p><h2>Company Party</h2> </p>
 
  
  <a href="familyGettogether.jsp">  <img src="/images/family-get.jpg" height="200px" width="400px"></a> <br> <br>
-  <a href="familyGettogether.jsp">Book now</a>
  <p>  <h2>Family Get Together</h2></p>
 
  
@@ -105,7 +100,7 @@ left: 50%;
 <center>
 
 <h1> All Event:</h1>
-<form modelAttribute="eventForm" method="POST" >
+<form modelAttribute="studentForm" method="POST"  action="${addURL}" >
 
 
 
@@ -149,8 +144,8 @@ left: 50%;
 
 <c:forEach items="${result}" var="event">  
   <tr>
-    <td>${event.event_id}</td>
-    <td>${event.event_name}</td>  
+    <td>${event.id}</td>
+    <td>${event.eventname}</td>  
     <td>${event.event_venue}</td>
     <td>${event.event_date}</td>
    
@@ -158,18 +153,18 @@ left: 50%;
     <td>${event.end_time}</td>
     <td>${event.description}</td>
     <td>${event.event_guest}</td>
-    <td>${event.photo}</td>
+   <td>image             :</td> <td><img  src= "data:image/jpeg;base64,${event.base64photo}" style="width: 50px;height: 80px ;"/></img></td>
       
     
     <td>
-       <spring:url value="/event/editEvent/${event.event_id}" var="editURL" />
-       <a class="btn btn-info" href="${editURL}" role="button" >Update</a>
+     <%--   <spring:url value="/event/editEvent/${event.event_id}" var="editURL" /> --%>
+       <a class="btn btn-info" href="/editEvent?id=${event.id}">Update</a>
       </td>
       <td>
-       <spring:url value="/event/deleteEvent/${event.event_id}" var="deleteURL" />
+       <spring:url value="/event/deleteEvent/${event.id}" var="deleteURL" />
        <a class="btn btn-danger" href="${deleteURL}" role="button" >Delete</a>
       </td>
-     
+   
     
 </c:forEach>
 
@@ -178,6 +173,8 @@ left: 50%;
 
 </tbody>
 </table>
+
+ </div>
 </fieldset></form>
 
 

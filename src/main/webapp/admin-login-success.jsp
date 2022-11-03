@@ -64,6 +64,12 @@ body {
   
 }
 
+
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
 .card {
 position : absolute;
 top: 1%;
@@ -74,11 +80,6 @@ left:95%;
   text-align: right;
   
   
-}
-
-.title {
-  color: grey;
-  font-size: 18px;
 }
 
 
@@ -108,7 +109,8 @@ height: 100%;
  
  
   <a href="viewuser">View Users</a>
-  <a href="addEvents.jsp">Add Events</a>
+  <a href="CreateEvent.jsp">Add Events</a>
+  <a href="ViewBookedUser">ViewBookedUser</a>
   
  
   <a href="logout.jsp">logout</a>
@@ -118,7 +120,9 @@ height: 100%;
 <div class="card">
  
   
-  <a href="Pofile.jsp"><img src="/images/3135715.png" height="20px" width="40px"></a>
+  <form action="yourprofile1">
+  <input type="submit" value="profile">
+  </form>
   
   
  

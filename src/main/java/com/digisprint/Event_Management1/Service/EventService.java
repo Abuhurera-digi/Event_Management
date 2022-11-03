@@ -1,10 +1,15 @@
 package com.digisprint.Event_Management1.Service;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +19,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.digisprint.Event_Management1.EventManagement1Application;
 import com.digisprint.Event_Management1.Model.Event;
@@ -28,19 +34,21 @@ import org.slf4j.LoggerFactory;
 public class EventService implements EventService1 {
 
 	
+	Event event;
 	@Autowired
 	  EventRepository eventRepository;
 	
 
 	
 
-	public void insert(HttpServletRequest request) throws ParseException {
+	public void insert(HttpServletRequest request, MultipartFile file, String directory) throws ParseException {
 		Event event = new Event();
 		
-		  int id=Integer.parseInt(request.getParameter("event_id"));
-		  event.setEvent_id(id);
+//		  int id=Integer.parseInt(request.getParameter("event_id"));
+//		  event.setEvent_id(id);
 		 
-		event.setEvent_name(request.getParameter("event_name"));
+		Boolean status= false;
+		event.setEventname(request.getParameter("eventname"));
 		event.setEvent_venue(request.getParameter("event_venue"));
 
 		String date2=request.getParameter("event_date");
@@ -49,20 +57,6 @@ public class EventService implements EventService1 {
 
 		event.setEvent_date(date12);
 
-
-		/*
-		 * String date=request.getParameter("start_time");
-		 * 
-		 * Date date1=new SimpleDateFormat(" HH:mm:ss ").parse(date);
-		 * 
-		 * event.setStart_time(date1);
-		 * 
-		 * String date4=request.getParameter("end_time");
-		 * 
-		 * Date date13=new SimpleDateFormat(" HH:mm:ss ").parse(date4);
-		 * 
-		 * event.setEnd_time(date13);
-		 */
 		
 		event.setStart_time(request.getParameter("start_time"));
 		event.setEnd_time(request.getParameter("end_time"));
@@ -71,16 +65,43 @@ public class EventService implements EventService1 {
 
 
 
+		//event.setPhoto(request.getParameter("photo"));
+		 try {
+		        InputStream stream= file.getInputStream();
+		        byte[] buffer= new byte[stream.available()];
+		        stream.read(buffer);
+		     //   fos.write(buffer);
+		        event.setPhoto(buffer);
+		    } catch (IOException e) {
+		        // TODO Auto-generated catch block
+		        e.printStackTrace();
+		    }
+		  
+		  
+		 List<Event> list= new ArrayList<>();
+		 eventRepository.findAll().forEach(e->list.add(e));
+		 for(Event event1:list) {
+	       if(!event1.getEvent_date().equals(date12))
+	       {
+	    	   status=true;
+	    	break;   
+	       }
+	       break;
+	       }
+		 if(status)
+		 {
+			 this.eventRepository.save(event);
+		 }
+		
 
-		event.setPhoto(request.getParameter("photo"));
 
 
 
 
-
-		this.eventRepository.save(event); 
 		
 	}
+	
+
 
 	//deleting 
 	@Override
@@ -91,15 +112,25 @@ public class EventService implements EventService1 {
 	
 		
 	
-	//fectching
+	//fectching with image
 	public String displayEvent(ModelMap model) {
 	    // TODO Auto-generated method stub
 	      List<Event> list =new ArrayList<Event>();
-	     eventRepository.findAll().forEach(i->list.add(i));
-	     model.addAttribute("result", list);
-	    
-	     return "ViewEvents";
-	}
+	      eventRepository.findAll().forEach(i->list.add(i));
+	      for(Event x:list)
+	       {
+	           byte[] imgdata=x.getPhoto();
+	           if(imgdata!=null)
+	           {
+	               String base64EncodedImageBytes = Base64.getEncoder().encodeToString(imgdata);
+	               x.setBase64photo(base64EncodedImageBytes);
+	           }
+	       }
+	      model.addAttribute("result", list);
+	     
+	      return "ViewEvents";
+	   }
+	  
 	
 	public String displayEvent1(ModelMap model) {
 	    // TODO Auto-generated method stub
@@ -110,19 +141,85 @@ public class EventService implements EventService1 {
 	     return "userViewEvent";
 	}
 //updateing
-	@Override
+	//@Override
 	public Event getEventById(int id) {
-		return eventRepository.findById(id).get();
+		return eventRepository.findById(id);
 	}
-	/*
-	 * public Boolean availabality(HttpServletRequest request){
-	 * 
-	 * List<Event> list = new ArrayList<>(); String status="";
-	 * eventRepository.findAll().forEach(x->list.add(x)); for(Event e:list) {
-	 * if(e.getEvent_date().equals(request.getParameter("date_of_arrival"))) {
-	 * return false; } break;
-	 * 
-	 * } return true; }
-	 */
 
+	
+	 
+	@Override
+	public void addStudent(Event student) {
+		eventRepository.save(student);
+	}
+	
+	//images
+	public List<Event> userpost(String eventname) throws UnsupportedEncodingException
+	{
+	    List<Event> list= new ArrayList<>();
+	    eventRepository.findAllByEventname(eventname).forEach(x->list.add(x));
+	    for(Event x:list)
+	    {
+	        byte[] imgdata=x.getPhoto();
+	        if(imgdata!=null)
+	        {
+	            String base64EncodedImageBytes = Base64.getEncoder().encodeToString(imgdata);
+	        
+	        x.setBase64photo(eventname);
+	        }
+	        
+	    }
+	    
+	    return list;
+	}
+	public Event getdatabyname(String eventname)
+    {
+        Event event= eventRepository.findByEventname(eventname);
+        return event;
+    }
+	
+	//now doing update
+	//@Override
+	public Event userdatafetching(int id) {
+      Event  event=eventRepository.findById(id);
+        System.out.println(event);
+        return event;
+	
+}
+
+
+
+
+	@Override
+	public Event userupdate(HttpServletRequest request) throws ParseException {
+		// TODO Auto-generated method stub
+		
+	       
+	        Event  event= new Event();
+	        Event user1=eventRepository.findById(Integer.parseInt(request.getParameter("id")));
+	        event.setId(user1.getId());
+//	        int id = Integer.parseInt(request.getParameter("id"));
+//	        event.setId(id);
+	        event.setEventname(request.getParameter("eventname"));
+	        event.setEvent_venue(request.getParameter("event_venue"));
+	        String date=request.getParameter("event_date");
+	        Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(date);  
+	        event.setEvent_date(date1);
+	        
+	        event.setStart_time(request.getParameter("start_time"));
+	        event.setEnd_time(request.getParameter("end_time"));
+	        event.setDescription(request.getParameter("description"));
+	        event.setEvent_guest(request.getParameter("event_guest"));
+	        byte[] imgdata=event.getPhoto();
+	        if(imgdata!=null)
+	        {
+	            String base64EncodedImageBytes = Base64.getEncoder().encodeToString(imgdata);
+	        
+	        event.setBase64photo(base64EncodedImageBytes);
+	        }
+	        
+	       
+	        this.eventRepository.save(event);
+	        return event;
+	    }
 }

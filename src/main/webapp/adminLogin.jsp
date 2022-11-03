@@ -5,6 +5,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style>
+
+body{
+background-image: url("images/adminimage.jpg");
+}
+
+</style>
 </head>
 <body>
 <center>

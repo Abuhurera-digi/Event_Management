@@ -1,6 +1,7 @@
 package com.digisprint.Event_Management1.Model;
 
 import java.sql.Time;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,26 +17,28 @@ public class Event {
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int event_id;
-	private String event_name;
+	private int id;
+	private String eventname;
 	private String event_venue;
     private Date event_date;
     private String start_time;
     private String end_time;
     private String description;
     private String event_guest;
-    private  String photo;
-	public int getEvent_id() {
-		return event_id;
+    private  byte[] photo;
+    private String base64photo;
+	
+	public int getId() {
+		return id;
 	}
-	public void setEvent_id(int event_id) {
-		this.event_id = event_id;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getEvent_name() {
-		return event_name;
+	public String getEventname() {
+		return eventname;
 	}
-	public void setEvent_name(String event_name) {
-		this.event_name = event_name;
+	public void setEventname(String eventname) {
+		this.eventname = eventname;
 	}
 	public String getEvent_venue() {
 		return event_venue;
@@ -73,17 +76,42 @@ public class Event {
 	public void setEvent_guest(String event_guest) {
 		this.event_guest = event_guest;
 	}
-	public String getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
-	public void setPhoto(String photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
+	}
+	
+	public String getBase64photo() {
+		return base64photo;
+	}
+	public void setBase64photo(String base64photo) {
+		this.base64photo = base64photo;
 	}
 	@Override
 	public String toString() {
-		return "Event [event_id=" + event_id + ", event_name=" + event_name + ", event_venue=" + event_venue
+		return "Event [id=" + id + ", event_name=" + eventname + ", event_venue=" + event_venue
 				+ ", event_date=" + event_date + ", start_time=" + start_time + ", end_time=" + end_time
-				+ ", description=" + description + ", event_guest=" + event_guest + ", photo=" + photo + "]";
+				+ ", description=" + description + ", event_guest=" + event_guest + ", photo=" + Arrays.toString(photo)
+				+ "]";
+	}
+	public Event(int event_id, String event_name, String event_venue, Date event_date, String start_time,
+			String end_time, String description, String event_guest, byte[] photo) {
+
+		this.id = event_id;
+		this.eventname = event_name;
+		this.event_venue = event_venue;
+		this.event_date = event_date;
+		this.start_time = start_time;
+		this.end_time = end_time;
+		this.description = description;
+		this.event_guest = event_guest;
+		this.photo = photo;
+	}
+	public Event() {
+		
+		// TODO Auto-generated constructor stub
 	}
 
 	

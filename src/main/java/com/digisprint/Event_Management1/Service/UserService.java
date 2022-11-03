@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.digisprint.Event_Management1.Model.Admin;
 import com.digisprint.Event_Management1.Model.User;
 import com.digisprint.Event_Management1.Repository.UserRepository;
 
@@ -24,7 +25,8 @@ import com.digisprint.Event_Management1.Repository.UserRepository;
 @Transactional
 public class UserService implements UserService1{
 
-
+	User user;
+@Autowired
 	private UserRepository userRepository;
 
 
@@ -32,23 +34,21 @@ public class UserService implements UserService1{
 		this.userRepository = userRepository;
 	}
 
-	public void viewDetails(
+	public String viewDetails(
 			@RequestParam("name") String name,
 			@RequestParam("email_id")  String email_id ,
 			@RequestParam("college_name") String college_name,
 			@RequestParam("phoneno" ) String phoneno,
 			@RequestParam("password") String password,
-			//@RequestParam("passConfirm") String passConfirm,
 
 			@RequestParam("gender") String gender
-			, ModelMap modelMap){ 
+			, ModelMap modelMap, HttpServletRequest request){ 
 		User user=new User();
 		user.setName(name);
 		user.setEmail_id(email_id);
 		user.setCollege_name(college_name);
 		user.setPhoneno(phoneno);
 		user.setPassword(password);
-		//user.setPassConfirm(passConfirm);
 		user.setGender(gender);
 		this.userRepository.save(user);
 		modelMap.put("cname",name);
@@ -56,10 +56,11 @@ public class UserService implements UserService1{
 		modelMap.put("college_name", college_name);
 		modelMap.put("phoneno", phoneno);
 		modelMap.put("password", password);
-		//modelMap.put("passConfirm", passConfirm);
 		modelMap.put("gender", gender);
+		return "Register_success";
 	}
 
+	
 	
 
 
@@ -78,12 +79,7 @@ public class UserService implements UserService1{
 	}
 	
 	
-	/*
-	 * public void deleteStudent(int id) {
-	 * 
-	 * userRepository.deleteById(id); System.out.println("Coming"); }
-	 * 
-	 */	
+	
 	@Override
 	public void deleteEvent(int id) {
 		userRepository.deleteById(id);
@@ -115,4 +111,38 @@ public class UserService implements UserService1{
 		
 		 userRepository.updatepassword(password,username, phoneno);
 	}
+
+
+	
+	@Override
+	public User getStudentById(int id) {
+		return userRepository.findById(id).get();
+	}
+//inserting
+	@Override
+	public User addUser(User user) {
+		// TODO Auto-generated method stub
+		return userRepository.save(user);
+	}
+	
+	//Updating
+	@Override
+	public User getUserId(int id) {
+		// TODO Auto-generated method stub
+		return userRepository.findById(id).get();
+	}
+// no register same phone number
+	@Override
+	public User exitsPhoneno(String phoneno) {
+		// TODO Auto-generated method stub
+		user= userRepository.findByPhoneno(phoneno);
+		return user;
+	}
+	
+
+	
+	
+	
+	
+	
 }

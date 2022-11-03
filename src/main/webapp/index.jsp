@@ -8,7 +8,7 @@
 <style >
 
 body{
-background-image: url("images/CollegeMangement.jpg");
+background-image: url("images/firstpage.webp");
 }
 
 </style>
@@ -16,7 +16,7 @@ background-image: url("images/CollegeMangement.jpg");
 <body>
 
 <center>
-  <h1>Welcome To  Event Management System</h1> 
+  <h1 style="color: white;">Welcome To  Event Management System</h1> 
   
   <fieldset style="width:400px">
   

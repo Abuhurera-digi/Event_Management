@@ -5,6 +5,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style>
+body{
+background-image: url("images/38156825background.webp");
+}
+
+</style>
 </head>
 <body>
 
@@ -16,7 +22,11 @@
 
 <form action="birthBook" method="post">
 
-Child_Name<input type="text" name="name_of_child" placeholder="Enter the name of child" required="required" > <br> <br>
+<c:if test="${not empty error}">
+  <h4>${error}</h4>
+  </c:if>
+
+Name<input type="text" name="name_of_child" placeholder="Enter the name " required="required" > <br> <br>
 Date_Of_Birth<input type="date" name="date_of_birth" placeholder="Enter your Date of birth" required="required"> <br> <br>
 
 
@@ -41,9 +51,9 @@ Material:<input type="radio" name="material" placeholder="Material" required="re
 <tr>
 <td><label for="cake">Cake</label></td>
 <td>    <select name="cake" id="cake">
-        <option value="500 g">500g</option>
+        <option value="500 g">500g</option> 
         <option value="1kg">1kg</option>
-        <option value="1.5kg">1.5kg</option>
+       <option value="1.5kg">1.5kg</option>
         <option value="2kg">2kg</option>
         <option value="2.5kg">2.5kg</option>
         <option value="3kg">3kg</option>
@@ -53,10 +63,10 @@ Material:<input type="radio" name="material" placeholder="Material" required="re
         <option value="5kg">5kg</option>
        
     </select></td>
-</tr>
-<input type="number" name="phoneno">
+</tr> <br> <br>
+Phone number:<input type="number" name="phoneno" placeholder="phone number">
 
-
+<br> <br>
 <input type="submit" value="Submit">
 
 
@@ -68,5 +78,6 @@ Material:<input type="radio" name="material" placeholder="Material" required="re
 </fieldset>
 
 </center>
+
 </body>
 </html>

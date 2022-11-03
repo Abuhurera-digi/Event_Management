@@ -1,12 +1,16 @@
 package com.digisprint.Event_Management1.Contoller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,171 +22,195 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.digisprint.Event_Management1.Model.Admin;
+import com.digisprint.Event_Management1.Model.Marriage;
 import com.digisprint.Event_Management1.Model.User;
 import com.digisprint.Event_Management1.Model.birthday;
+import com.digisprint.Event_Management1.Model.family;
+import com.digisprint.Event_Management1.Repository.AdminRepositrory;
+import com.digisprint.Event_Management1.Repository.FamilyRepository;
+import com.digisprint.Event_Management1.Repository.MarriageRepository;
 import com.digisprint.Event_Management1.Repository.UserRepository;
 import com.digisprint.Event_Management1.Repository.birthdayRepository;
 import com.digisprint.Event_Management1.Service.AdminService;
 import com.digisprint.Event_Management1.Service.UserService;
 
-
 @Controller
 
 public class UserController {
 
-		private UserRepository repository;
-		@Autowired
-		private birthdayRepository birthdayRepository;
+	private UserRepository repository;
+	@Autowired
+	private birthdayRepository birthdayRepository;
+	@Autowired
+	private AdminRepositrory adminRepositrory;
+	@Autowired
+	private MarriageRepository marriageRepository;
+	@Autowired
+	private FamilyRepository familyRepository;
 	private UserService userService;
 	AdminService adminService;
-	
-	 User user1; 	
 
-	public UserController(UserRepository repository, UserService userService,AdminService adminService) {
+	User user1= new User();
+	User user4;
+	Admin admin;
+
+	public UserController(UserRepository repository, UserService userService, AdminService adminService) {
 		this.repository = repository;
 		this.userService = userService;
-		this.adminService=adminService;
+		this.adminService = adminService;
 	}
 
 	@RequestMapping("/")
-	public String Entry() {
+	public String FirstMapping() {
 
 		return "index";
 	}
- 
+
 	@GetMapping("/User1")
-	public String Get() {
+	public String UserLogin() {
 		return "UserLogin";
 	}
-	
-
+// no register with same number
 	@GetMapping("/Create")
-	public String Getin() {
-		return "UserRegister";
-	}
-
-	@PostMapping("/Register")
-	public String InsertDetails( @RequestParam("name") String name, @RequestParam("email_id") String email_id,
-			@RequestParam("college_name") String college_name, @RequestParam("phoneno") String phoneno,
+	public String CreateAccount(@ModelAttribute("userForm") User user, Model model) {
+		
+		
+			return "UserRegister";
+		}
+		
+//		return "UserRegister";  
+	//}
+	//inserting
+	@PostMapping("/addAdmin")
+	public String UserRegister(@ModelAttribute("userForm") User user,@RequestParam("name") String name,
+			@RequestParam("email_id")  String email_id ,
+			@RequestParam("college_name") String college_name,
+			@RequestParam("phoneno" ) String phoneno,
 			@RequestParam("password") String password,
 			//@RequestParam("passConfirm") String passConfirm,
 
-			@RequestParam("Gender") String gender, ModelMap modelMap) {
+			@RequestParam("gender") String gender
+			, ModelMap modelMap, HttpServletRequest request) {
+		user1=userService.exitsPhoneno(phoneno);
+		if(user1==null) {
+				return userService.viewDetails(name, email_id, college_name, phoneno, password, gender, modelMap, request);
+		}
+		else {
+			modelMap.addAttribute("error", "This phone Number is already exits");
+			return "UserRegister";
+		}
+	}
 
-		userService.viewDetails(name, email_id, college_name, phoneno, password, gender,   modelMap);
-		return "Register_success";
+	@PostMapping("/login")
+	public String login(@ModelAttribute("user") User user,Model  model) {
+		user1 = userService.login(user.getPhoneno(), user.getPassword());
+		System.out.println("user1" + user1);
+		if (Objects.nonNull(user1)) {
+			return "login-success";
+		} else {
+         model.addAttribute("error", "user not found");
+			return "UserLogin";
+		}
 
 	}
 
-	
-	  @PostMapping("/login")
-	  public String login(@ModelAttribute ("user") User user) 
-	  {
-		  user1 = userService.login(user.getPhoneno(), user.getPassword());
-		  System.out.println("user1"+user1);
-		  if(Objects.nonNull(user1))
-		  {
-			  return "login-success";
-		  }
-			  else {
-				  
-				  return "login-error";
-			  }
-		  
-		 
-	  
-	  }
-	  
-	  @PostMapping("/pass")
-	  public String  paasword(@ModelAttribute ("user") User user)
-	  {
-		  User user2 = userService.forgetpass(user.getName(), user.getPhoneno());
-		  System.out.println(user2);
-		  if(Objects.nonNull(user2))
-		  {
-			  return "changePassword";
-		  }
-		  else {
-			  return "forpassword";
-		  }
-		  
-	  }
-	  
-		
-		 
-		
-	  
-	  
-	  //delete
-	  @RequestMapping(value="/user/deleteStudent/{id}", method=RequestMethod.GET)
-		 public ModelAndView delete(@PathVariable("id") int id) {
-			 
-		  userService.deleteEvent(id);
-		  return new ModelAndView("redirect:/viewuser");
-		  
-		 }
-		
-		 
-	  
-	  @GetMapping("/viewuser")
-      public String displayUser(ModelMap model) {
-        
-        
-        return userService.displayUser(model);
-          
-      }
-		 
-	  
-	  //your profile
-	  @GetMapping("/yourprofile")
-      public String yourProfile(ModelMap model) {
-        
-       
-        model.put("user", user1);
-        List<birthday> list = new ArrayList<>();
-		birthdayRepository.findAllByPhoneno(user1.getPhoneno()).forEach(x->list.add(x));
-		System.out.println(list);
-        model.put("birthday", list);
+	@PostMapping("/pass")
+	public ModelAndView paasword(@ModelAttribute("user") User user) {
+		ModelAndView modelAndView = new ModelAndView("forpassword");
+		user4 = userService.forgetpass(user.getName(), user.getPhoneno());
+		System.out.println(user4);
+		if (Objects.nonNull(user4)) {
+			modelAndView.addObject("userForm", user4);
+			modelAndView.setViewName("/UserRegister");
+		}
+		return modelAndView;
+		}
 
-         return "Pofile";
-          
-      }
-	  
-	  
-	  //update password
-	  @PostMapping("/changepass")
-	  public String  changePassword(@ModelAttribute ("user") User user)
-	  {
-		  User user2 = userService.changepassword(user.getPassword());
-		  System.out.println(user2);
-		  if(Objects.nonNull(user2))
-		  {
-			  return "changePassword";
-		  }
-		  else {
-			  return "password";
-		  }
-		  
-	  }
-	  
+	
+
+	// delete
+	@RequestMapping(value = "/user/deleteStudent/{id}", method = RequestMethod.GET)
+	public ModelAndView delete(@PathVariable("id") int id) {
+
+		userService.deleteEvent(id);
+		return new ModelAndView("redirect:/viewuser");
+
+	}
+
+	@GetMapping("/viewuser")
+	public String displayUser(ModelMap model) {
+
+		return userService.displayUser(model);
+
+	}
+
+	// your profile
+	@GetMapping("/yourprofile")
+	public String yourProfile(ModelMap model) {
+
+		model.put("user", user1);
+
+		List<birthday> list = new ArrayList<>();
+		birthdayRepository.findAllByPhoneno(user1.getPhoneno()).forEach(x -> list.add(x));
+		System.out.println(list);
+		List<Marriage> user2 = new ArrayList<>();
+		marriageRepository.findAllByPhoneno(user1.getPhoneno()).forEach(y -> user2.add(y));
+		System.out.println(user2);
+		List<family> user3 = new ArrayList<>();
+		familyRepository.findAllByPhoneno(user1.getPhoneno()).forEach(y -> user3.add(y));
+		System.out.println(user3);
+
+		model.put("birthday", list);
+		model.put("marriage", user2);
+		model.put("family", user3);
+
+		return "Pofile";
+
+	}
+
+	// update password
+	@PostMapping("/changepass")
+	public String changePassword(@ModelAttribute("user") User user) {
+		//adding new line to code	
+		User user2 = userService.changepassword(user.getPassword());
+		System.out.println(user2);
+		if (Objects.nonNull(user2)) {
+			return "changePasswordRrgister";
+		} else {
+			return "password";
+		}
+	}
+
+	// forgot password
+	@GetMapping("/viewPass")
+	public String seePassword(ModelMap model) {
+
+		model.put("user1", user4);
+		System.out.println("user4" + user4);
+		return "changePassword";
+
+	}
+//updating
+	@RequestMapping("/editUser/{id}")
+	public ModelAndView changePassword(@PathVariable("id") int id) {
+		ModelAndView modelAndView = new ModelAndView();
+		User user = userService.getUserId(id);
+		modelAndView.addObject("userForm", user);
+		modelAndView.setViewName("/updateUser");
+		return modelAndView;
+
+	}
+//inserting after update
+@RequestMapping(value = "/abcdef", method = RequestMethod.POST)
+	public ModelAndView add(@ModelAttribute("userForm") User user ) {
 		
-		/*
-		 * @PostMapping("/changepassword1") public String changePassword1(@RequestParam
-		 * ("password") String password , @RequestParam("phoneno") String phoneno, User
-		 * user) {
-		 * 
-		 * user.setPassword(password);
-		 * 
-		 * System.out.println("password"+password); String password1=user.getPassword();
-		 * String username= user.getName(); User currentUser=
-		 * this.repository.getUserByName(username);
-		 * userService.updatePassword(password1, username, phoneno);
-		 * //System.out.println(currentUser.getPassword());
-		 * 
-		 * 
-		 * return "Register_success"; }
-		 */
-		 
+			userService.addUser(user);
+		
+		ModelAndView modelAndView = new ModelAndView("index");
+		return modelAndView;
+	}
+	
 	
 
 }

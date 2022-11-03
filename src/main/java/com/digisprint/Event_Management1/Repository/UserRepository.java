@@ -31,7 +31,7 @@ public interface UserRepository  extends JpaRepository<User, Integer>{
 	
 	User findByPassword(String password);
 	User getUserByName(String name);
+	User findByPhoneno(String phoneno);
 
-	
 
 }

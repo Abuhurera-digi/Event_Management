@@ -23,7 +23,7 @@ public class family {
 	private String alcohol;
 	private Date date_of_arrival;
 	private Date date_of_departure;
-	private String phone_no;
+	private String phoneno;
 	public int getid() {
 		return id;
 	}
@@ -78,19 +78,21 @@ public class family {
 	public void setDate_of_departure(Date date_of_departure) {
 		this.date_of_departure = date_of_departure;
 	}
-	public String getPhone_no() {
-		return phone_no;
+	
+	public String getPhoneno() {
+		return phoneno;
 	}
-	public void setPhone_no(String phone_no) {
-		this.phone_no = phone_no;
+	public void setPhoneno(String phoneno) {
+		this.phoneno = phoneno;
 	}
 	@Override
 	public String toString() {
-		return "family [userid=" + id + ", familyname=" + familyname + ", Address=" + address + ", no_of_attendees="
+		return "family [id=" + id + ", familyname=" + familyname + ", address=" + address + ", no_of_attendees="
 				+ no_of_attendees + ", no_of_rooms=" + no_of_rooms + ", catering=" + catering + ", alcohol=" + alcohol
-				+ ", date_of_arrival=" + date_of_arrival + ", date_of_departure=" + date_of_departure + ", phone_no="
-				+ phone_no + "]";
+				+ ", date_of_arrival=" + date_of_arrival + ", date_of_departure=" + date_of_departure + ", phoneno="
+				+ phoneno + "]";
 	}
+	
 	
 	
 	

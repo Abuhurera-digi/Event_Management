@@ -2,15 +2,17 @@ package com.digisprint.Event_Management1.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.digisprint.Event_Management1.Model.Company;
-import com.digisprint.Event_Management1.Model.Marriage;
 import com.digisprint.Event_Management1.Repository.ComapnyRepository;
 
 @Service
@@ -50,5 +52,29 @@ public class CompanyService {
 		System.out.println(company.getDate_of_arrival());
 
 		this.comapnyRepository.save(company); }
+	
+	
+	// check availabality
+		public boolean availabality(@RequestParam("date_of_arrival") Date date_of_arrival){
+		  Boolean status=false;
+		  List<Company> list = new ArrayList<>();
+		  comapnyRepository.findAll().forEach(x->list.add(x)); 
+		  System.out.println("coming");
+		  
+		  for(Company e:list) {
+			  Date d1=e.getDate_of_arrival();
+			  Date d2 = date_of_arrival;
+		  if(d1.compareTo(d2)==0) 
+		  {
+			  System.out.println(date_of_arrival);
+			  status=true;
+			  break;
+		  }
+		  
+		  }
+		  		return status;
+		  }
+		
+		
 
 }

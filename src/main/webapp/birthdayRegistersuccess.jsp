@@ -8,10 +8,10 @@
 </head>
 <body>
 <h1>Confirm Booking</h1>
-<h2>If you want cancel no refund  </h2>
+<h2>If you want cancel go to profile page </h2>
+<a href="login-success.jsp">profile page</a>
 
-<form action="abu/{phoneno}">
-<input type="submit" value="cancel">
+
 
 </form>
 </body>

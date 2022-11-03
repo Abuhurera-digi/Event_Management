@@ -24,6 +24,7 @@ public class Marriage {
   private String catering;
   private String decoration;
   private String photographer;
+  private String phoneno;
 public int getId() {
 	return id;
 }
@@ -84,14 +85,21 @@ public String getPhotographer() {
 public void setPhotographer(String photographer) {
 	this.photographer = photographer;
 }
+
+public String getPhoneno() {
+	return phoneno;
+}
+public void setPhoneno(String phoneno) {
+	this.phoneno = phoneno;
+}
 @Override
 public String toString() {
 	return "Marriage [id=" + id + ", bride_name=" + bride_name + ", groom_name=" + groom_name + ", venue=" + venue
 			+ ", date_of_arrival=" + date_of_arrival + ", date_of_departure=" + date_of_departure + ", no_of_relatives="
 			+ no_of_relatives + ", catering=" + catering + ", decoration=" + decoration + ", photographer="
-			+ photographer + "]";
+			+ photographer + ", phoneno=" + phoneno + "]";
 }
-  
+
   
 
 }
