@@ -40,7 +40,7 @@ background-image: url("images/AddEvents.jpg");
 
    <div class="form-group">
     <label>Email Id</label>
-    <form:input path="email_id" cssClass="form-control" id="email_id" placeholder="Enter Your Email Id" />
+    <form:input path="email_id" cssClass="form-control" id="email_id" placeholder="Enter Your Email Id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
    </div>
    <br> <br>
    
@@ -52,13 +52,13 @@ background-image: url("images/AddEvents.jpg");
    
    <div class="form-group">
     <label>Phone Number</label>
-    <form:input path="phoneno" cssClass="form-control" id="phoneno" placeholder="Enter Your Phone Number" />
+    <form:input type="number" path="phoneno" cssClass="form-control" id="phoneno" placeholder="Enter Your Phone Number" pattern="[0-9]{10}" />
    </div>
    <br> <br>
    
      <div class="form-group">
     <label>Password</label>
-    <form:input path="password" cssClass="form-control" id="password"  placeholder="Enter Your Password" />
+    <form:input type="password" path="password" cssClass="form-control" id="password"  placeholder="Enter Your Password" pattern=".{8,}" title="Eight or more characters" />
    </div>
    <br> <br>
       <div class="form-group">

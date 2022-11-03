@@ -196,7 +196,7 @@ public class UserController {
 	@RequestMapping(value = "/UpdateUser", method = RequestMethod.POST)
 	public ModelAndView add(@ModelAttribute("userForm") User user ) {
 
-		userService.addUser(user);
+		userService.addUser(user); 
 
 		ModelAndView modelAndView = new ModelAndView("index");
 		return modelAndView;
