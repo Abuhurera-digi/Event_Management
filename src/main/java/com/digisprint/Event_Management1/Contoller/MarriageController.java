@@ -22,50 +22,50 @@ import com.digisprint.Event_Management1.Service.UserService;
 
 @Controller
 public class MarriageController {
-	
-	
-	
+
+
+
 	@Autowired
 	MarriageService marriageService;
-	
-	
-	  @PostMapping("/marriagebook")
-	  public String value1(@RequestParam("venue") String venue,
-				@RequestParam("date_of_arrival" ) Date date_of_arrival ,HttpServletRequest request,ModelMap modelMap) throws ParseException {
-	  
-	  
-	  
-	  if((marriageService.availabality(date_of_arrival,venue)))  {
-	    	 modelMap.addAttribute("error", "This Slot  is already booked, you can choose other date or venue");
-				return "marriageparty ";
-	   }
-	     else {
-	    	 marriageService.insert(request);  
-	   	  return "marriageRegistersuccess";
-	    }
-	  } 
-	  
- 
-	
-	
-	
-	  //cancel Booked Event
-	  @RequestMapping(value="/marriage/cancleEvent/{phoneno}",
-			  method=RequestMethod.GET) public ModelAndView cancleBooked(@PathVariable("phoneno")
-			  String phoneno ) {
-			  
-			 marriageService.cancle1(phoneno); 
-			 return new ModelAndView("/cancel-success");
-			  
-			  }
-	  
-	  //cancel booked user
-	  @RequestMapping(value="/marri/cancleEvent/{id}",
-			  method=RequestMethod.GET) public ModelAndView cancleBooked(@PathVariable("id")
-			  int id) {
-			  
-			  marriageService.deleteBookedEvent(id); 
-			  return new ModelAndView("/cancel-success");
-	  }
-			  
+
+
+	@PostMapping("/marriagebook")
+	public String value1(@RequestParam("venue") String venue,
+			@RequestParam("date_of_arrival" ) Date date_of_arrival ,HttpServletRequest request,ModelMap modelMap) throws ParseException {
+
+
+
+		if((marriageService.availabality(date_of_arrival,venue)))  {
+			modelMap.addAttribute("error", "This Slot  is already booked, you can choose other date or venue");
+			return "marriageparty ";
+		}
+		else {
+			marriageService.insert(request);  
+			return "marriageRegistersuccess";
+		}
+	} 
+
+
+
+
+
+	//cancel Booked Event
+	@RequestMapping(value="/marriage/cancleEvent/{phoneno}",
+			method=RequestMethod.GET) public ModelAndView cancleBooked(@PathVariable("phoneno")
+			String phoneno ) {
+
+		marriageService.cancle1(phoneno); 
+		return new ModelAndView("/cancel-success");
+
+	}
+
+	//cancel booked user
+	@RequestMapping(value="/marri/cancleEvent/{id}",
+			method=RequestMethod.GET) public ModelAndView cancleBooked(@PathVariable("id")
+			int id) {
+
+		marriageService.deleteBookedEvent(id); 
+		return new ModelAndView("/cancel-success");
+	}
+
 }

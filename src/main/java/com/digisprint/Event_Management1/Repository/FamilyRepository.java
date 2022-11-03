@@ -9,6 +9,6 @@ import com.digisprint.Event_Management1.Model.family;
 
 public interface FamilyRepository extends CrudRepository<family, Integer>{
 
-	
+
 	public List<family> findAllByPhoneno(String phoneno);
 }

@@ -1,4 +1,4 @@
- package com.digisprint.Event_Management1.Service;
+package com.digisprint.Event_Management1.Service;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import com.digisprint.Event_Management1.Repository.UserRepository;
 public class UserService implements UserService1{
 
 	User user;
-@Autowired
+	@Autowired
 	private UserRepository userRepository;
 
 
@@ -60,16 +60,16 @@ public class UserService implements UserService1{
 		return "Register_success";
 	}
 
-	
-	
 
 
-	public User forgetpass(String name, String phoneno) {
+
+
+	public User forgetPassword(String name, String phoneno) {
 		User user = userRepository.findBynameAndPhoneno(name, phoneno);
 		return user;
 	}
-	
-	
+
+
 
 
 
@@ -77,72 +77,69 @@ public class UserService implements UserService1{
 		User user= userRepository.findByPhonenoAndPassword(phoneno, password);
 		return user;
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void deleteEvent(int id) {
 		userRepository.deleteById(id);
 	}
-	
-	
+
+
 	public String displayUser(ModelMap model) {
-	    // TODO Auto-generated method stub
-	      List<User>list=new ArrayList<User>();
-	     userRepository.findAll().forEach(i->list.add(i));
-	     model.addAttribute("result", list);
-	    
-	     return "viewuser";
+		// TODO Auto-generated method stub
+		List<User>list=new ArrayList<User>();
+		userRepository.findAll().forEach(i->list.add(i));
+		model.addAttribute("result", list);
+
+		return "viewuser";
 	}
-	
-	
+
+
 	//update password
-	
+
 	public User changepassword( String password) {
-		
+
 		List <User> list = new ArrayList<>();
 		return userRepository.findByPassword(password);
-		
-		
-		
-	}
 
-	public void updatePassword(	String password,String username, String phoneno) {
-		
-		 userRepository.updatepassword(password,username, phoneno);
+
+
 	}
 
 
-	
+
+
+
 	@Override
 	public User getStudentById(int id) {
 		return userRepository.findById(id).get();
 	}
-//inserting
+	//inserting
 	@Override
 	public User addUser(User user) {
 		// TODO Auto-generated method stub
 		return userRepository.save(user);
 	}
-	
+
 	//Updating
 	@Override
 	public User getUserId(int id) {
 		// TODO Auto-generated method stub
 		return userRepository.findById(id).get();
 	}
-// no register same phone number
+	// no register same phone number
 	@Override
 	public User exitsPhoneno(String phoneno) {
 		// TODO Auto-generated method stub
 		user= userRepository.findByPhoneno(phoneno);
 		return user;
 	}
-	
 
-	
-	
-	
-	
-	
+
+
+
+
+
+
 }

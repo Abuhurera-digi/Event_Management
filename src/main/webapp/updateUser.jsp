@@ -25,7 +25,7 @@ background-image: url("images/AddEvents.jpg");
   
 <div class="container">
 
-  <spring:url value="/abcdef" var="addURL" />
+  <spring:url value="/UpdateUser" var="addURL" />
   <h2>Update Here </h2>
   <form:form modelAttribute="userForm" method="post" action="${addURL}" cssClass="form" >
    <form:hidden path="id"/>

@@ -22,48 +22,48 @@ import com.digisprint.Event_Management1.Service.FamilyService;
 
 @Controller
 public class FamilyContoller {
-	
-	
+
+
 	@Autowired
 	FamilyService familyService;
-	
+
 	@PostMapping("/familyinsert")
-	  public String Insert(HttpServletRequest
-			  request, ModelMap modelMap) throws ParseException {
-			  
-			  
-		 family family = new family();
-		  String date2=request.getParameter("date_of_arrival");
-			Date date12=new SimpleDateFormat("yyyy-MM-dd").parse(date2);
-			family.setDate_of_arrival(date12);
-		  if(familyService.availabality(date12)){
-			  modelMap.addAttribute("error", "This Slot  is already booked, you can choose other date or venue");
-				return "familyGettogether";
-		  }
-		  familyService.insert(request); System.out.println("inserted"); 
-		  return  "familyRegister";
-		  
-		 
-		  
-		  
-		  
-		  }
-			
-			  
-			  
-			  
-			  
-	
+	public String Insert(HttpServletRequest
+			request, ModelMap modelMap) throws ParseException {
+
+
+		family family = new family();
+		String date2=request.getParameter("date_of_arrival");
+		Date date12=new SimpleDateFormat("yyyy-MM-dd").parse(date2);
+		family.setDate_of_arrival(date12);
+		if(familyService.availabality(date12)){
+			modelMap.addAttribute("error", "This Slot  is already booked, you can choose other date or venue");
+			return "familyGettogether";
+		}
+		familyService.insert(request); System.out.println("inserted"); 
+		return  "familyRegister";
+
+
+
+
+
+	}
+
+
+
+
+
+
 	//cancel booked user
-	  @RequestMapping(value="/family/cancleEvent/{id}",
-			  method=RequestMethod.GET) public ModelAndView cancleBooked(@PathVariable("id")
-			  int id) {
-			  
-			  familyService.deleteBookedEvent(id); 
-			  System.out.println("Coming");
-			  return new ModelAndView("/cancel-success");
-			  
-			  }
+	@RequestMapping(value="/family/cancleEvent/{id}",
+			method=RequestMethod.GET) public ModelAndView cancleBooked(@PathVariable("id")
+			int id) {
+
+		familyService.deleteBookedEvent(id); 
+		System.out.println("Coming");
+		return new ModelAndView("/cancel-success");
+
+	}
 
 
 }

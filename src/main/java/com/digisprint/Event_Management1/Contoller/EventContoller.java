@@ -1,5 +1,5 @@
 package com.digisprint.Event_Management1.Contoller;
- 
+
 
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
@@ -33,102 +33,102 @@ public class EventContoller {
 	@Autowired
 	EventService eventService;
 	EventRepository eventRepository;
-	
-	
+
+
 
 	public static String directory="D:\\socialmediapage\\digi-page\\src\\main\\resources\\static\\images";
 
 
 	@PostMapping("/addEvent")
-	  public ModelAndView detatils(HttpServletRequest request, @RequestParam("photo") MultipartFile file, ModelMap map) throws  UnsupportedEncodingException, ParseException{
-			 
+	public ModelAndView detatils(HttpServletRequest request, @RequestParam("photo") MultipartFile file, ModelMap map) throws  UnsupportedEncodingException, ParseException{
+
 		eventService.insert(request,file,directory);
 		ModelAndView modelAndView = new ModelAndView("ViewEvents");
-			  return modelAndView;	
+		return modelAndView;	
 	}
-	
-	 @GetMapping("/Event")
-     public String displayEvent(ModelMap model) {
-       
-       
-       return eventService.displayEvent(model);
-         
-     }
-	 
-	 @GetMapping("/Event1")
-     public String displayEvent1(ModelMap model) {
-       
-       
-       return eventService.displayEvent1(model);
-         
-     }
-	 
-	 
+
+	@GetMapping("/Event")
+	public String displayEvent(ModelMap model) {
+
+
+		return eventService.displayEvent(model);
+
+	}
+
+	@GetMapping("/Event1")
+	public String displayEvent1(ModelMap model) {
+
+
+		return eventService.displayEvent1(model);
+
+	}
+
+
 	//delete
-	 @RequestMapping(value="/event/deleteEvent/{id}", method=RequestMethod.GET)
-	 public ModelAndView delete(@PathVariable("id") int id) {
-		 
-	  eventService.deleteEvent(id);
-	  System.out.println("Coming");
-	  return new ModelAndView("/ViewEvents");
-	  
-	 }
-	 
-	 //updating
-	 
-	 
-		
-		  @RequestMapping(value=" /event/editFundraiser/{id}",
-		  method=RequestMethod.GET)
-		  public ModelAndView editStudent(@PathVariable int
-		  event_id) {
-			  ModelAndView model = new ModelAndView("/ViewEvents");
-		  
-		  Event event = eventService.getEventById(event_id);
-		  model.addObject("studentForm", event);
-		  model.getModel();
-		  model.setViewName("/addEvents");
-		  
-		  return model; }
-	  
-	
-		//search
-			@PostMapping("/searchfriend")
-			public ModelAndView searchEvent(ModelMap map,HttpServletRequest request) throws UnsupportedEncodingException
-			{
-				 ModelAndView mv= new ModelAndView("afterSearch");
-				String name=request.getParameter("eventname");
-			//	System.out.println(name);
-				  Event event=eventService.getdatabyname(name);
-				    map.put("event_data", event);
-				     
-				      System.out.println(event);
-				      return mv;
-				}
-			
-			//// now doing
-			
-			@RequestMapping(value="/editEvent", method=RequestMethod.GET)
-		      public ModelAndView viewAll(@RequestParam("id") int id,ModelMap map) 
-			{
-				
-				System.out.println("coming inside");
-		       ModelAndView modelAndView=new ModelAndView("/addEvents");
-		       System.out.println("come");
-		      Event list=eventService.userdatafetching(id);
-		      map.put("userdata", list);
-		      System.out.println(list);
-		  
-		      return modelAndView;
-		    }
-		    
-		    @PostMapping("/updateUser")
-		    public ModelAndView updatetable(HttpServletRequest request,ModelMap map) throws ParseException {
-		         ModelAndView modelAndView=new ModelAndView("/ViewEvents");
-		        Event event= eventService.userupdate(request);
-		        map.put("user", event);
-		        System.out.println(event);
-		         return modelAndView;
-		    }
-	 
+	@RequestMapping(value="/event/deleteEvent/{id}", method=RequestMethod.GET)
+	public ModelAndView delete(@PathVariable("id") int id) {
+
+		eventService.deleteEvent(id);
+		System.out.println("Coming");
+		return new ModelAndView("/ViewEvents");
+
+	}
+
+	//updating
+
+
+
+	@RequestMapping(value=" /event/editFundraiser/{id}",
+			method=RequestMethod.GET)
+	public ModelAndView editStudent(@PathVariable int
+			event_id) {
+		ModelAndView model = new ModelAndView("/ViewEvents");
+
+		Event event = eventService.getEventById(event_id);
+		model.addObject("studentForm", event);
+		model.getModel();
+		model.setViewName("/addEvents");
+
+		return model; }
+
+
+	//search
+	@PostMapping("/searchfriend")
+	public ModelAndView searchEvent(ModelMap map,HttpServletRequest request) throws UnsupportedEncodingException
+	{
+		ModelAndView mv= new ModelAndView("afterSearch");
+		String name=request.getParameter("eventname");
+		//	System.out.println(name);
+		Event event=eventService.getdatabyname(name);
+		map.put("event_data", event);
+
+		System.out.println(event);
+		return mv;
+	}
+
+	//// now doing
+
+	@RequestMapping(value="/editEvent", method=RequestMethod.GET)
+	public ModelAndView viewAll(@RequestParam("id") int id,ModelMap map) 
+	{
+
+		System.out.println("coming inside");
+		ModelAndView modelAndView=new ModelAndView("/addEvents");
+		System.out.println("come");
+		Event list=eventService.userdatafetching(id);
+		map.put("userdata", list);
+		System.out.println(list);
+
+		return modelAndView;
+	}
+
+	@PostMapping("/updateUser")
+	public ModelAndView updatetable(HttpServletRequest request,ModelMap map) throws ParseException {
+		ModelAndView modelAndView=new ModelAndView("/ViewEvents");
+		Event event= eventService.userupdate(request);
+		map.put("user", event);
+		System.out.println(event);
+		return modelAndView;
+	}
+
 }

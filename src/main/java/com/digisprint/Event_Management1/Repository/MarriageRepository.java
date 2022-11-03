@@ -1,4 +1,4 @@
- package com.digisprint.Event_Management1.Repository;
+package com.digisprint.Event_Management1.Repository;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import com.digisprint.Event_Management1.Model.birthday;
 
 public interface MarriageRepository extends CrudRepository<Marriage, Integer> {
 
-	
-	 public List<Marriage> findAllByPhoneno(String phoneno);
-	 public void deleteByPhoneno(String phoneno);
+
+	public List<Marriage> findAllByPhoneno(String phoneno);
+	public void deleteByPhoneno(String phoneno);
 
 
 }

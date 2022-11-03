@@ -22,11 +22,11 @@ import com.digisprint.Event_Management1.Service.AdminService;
 
 @Controller
 public class AdminContoller {
-	
+
 	Admin admin1;
 	@Autowired
 	AdminService adminService;
-	
+
 	@GetMapping("/Admin")
 	public String adminLogin() {
 		return "adminLogin";
@@ -36,50 +36,50 @@ public class AdminContoller {
 	public String createAdmin() {
 		return "adminregister";
 	}
-	
-	
-	  @PostMapping("/adminlogin")
-	  public String login(@ModelAttribute ("admin") Admin admin) 
-	  {
-		   admin1 = adminService.login(admin.getname(), admin.getPassword());
+
+
+	@PostMapping("/adminlogin")
+	public String login(@ModelAttribute ("admin") Admin admin) 
+	{
+		admin1 = adminService.login(admin.getname(), admin.getPassword());
 		//  System.out.println(admin1);
-		  if(Objects.nonNull(admin1))
-		  {
-			  return "admin-login-success";
-		  }
-			  else {
-				  
-				  return "admin-login-error";
-			  }
-		  
-		 
-	  
-	  }
-	  
-	  //your profile
-	  @GetMapping("/yourprofile1")
-      public String yourProfile(ModelMap model) {
-        //checking
-		 model.put("admin", admin1);
+		if(Objects.nonNull(admin1))
+		{
+			return "admin-login-success";
+		}
+		else {
+
+			return "admin-login-error";
+		}
+
+
+
+	}
+
+	//your profile
+	@GetMapping("/yourprofile1")
+	public String yourProfile(ModelMap model) {
+		//checking
+		model.put("admin", admin1);
 		return "adminProfile";
-	  }
-	  
-	  
-	  @RequestMapping("/editAdmin/{id}")
-	  public ModelAndView changePassword(@PathVariable("id") int id)
-	  {
-		  ModelAndView modelAndView = new ModelAndView();
-		  Admin admin = adminService.getAdminId(id);
-		  modelAndView.addObject("adminForm", admin);
-		  modelAndView.setViewName("/adminregister");
-		  return modelAndView;
-		  
-	  }
-	  @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	  public ModelAndView add(@ModelAttribute("adminForm") Admin admin)
-	  {
-		  adminService.addAdmin(admin);
-		  return new ModelAndView("redirect:");
-	  }
+	}
+
+
+	@RequestMapping("/editAdmin/{id}")
+	public ModelAndView changePassword(@PathVariable("id") int id)
+	{
+		ModelAndView modelAndView = new ModelAndView();
+		Admin admin = adminService.getAdminId(id);
+		modelAndView.addObject("adminForm", admin);
+		modelAndView.setViewName("/adminregister");
+		return modelAndView;
+
+	}
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
+	public ModelAndView add(@ModelAttribute("adminForm") Admin admin)
+	{
+		adminService.addAdmin(admin);
+		return new ModelAndView("redirect:");
+	}
 
 }

@@ -12,8 +12,8 @@ import org.hibernate.annotations.GeneratorType;
 @Entity
 @Table
 public class Admin {
-	
-	
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column

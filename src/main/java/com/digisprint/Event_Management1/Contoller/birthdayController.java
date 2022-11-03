@@ -1,4 +1,4 @@
- package com.digisprint.Event_Management1.Contoller;
+package com.digisprint.Event_Management1.Contoller;
 import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,12 @@ import com.digisprint.Event_Management1.Service.BirthdayService;
 @Configuration
 @Component
 public class BirthdayController {
-		@Autowired
+	@Autowired
 	BirthdayService birthdayService;
 	@Autowired
 	birthdayRepository birthdayRepository;
-		
-		@PostMapping("/birthBook")
+
+	@PostMapping("/birthBook")
 	public String insertDetails(@RequestParam("name_of_child") String name_of_child,
 			@RequestParam("date_of_birth")  Date date_of_birth ,
 			@RequestParam("venue") String venue,
@@ -35,44 +35,43 @@ public class BirthdayController {
 			@RequestParam("material") String material,
 			@RequestParam("cake") String cake,
 			@RequestParam("phoneno") String phoneno,
-						 ModelMap modelMap){ 
-		
-	     if((birthdayService.availabality(date_of_arrival,venue)))  {
-    	 modelMap.addAttribute("error", "This Slot  is already booked, you can choose other date or venue");
+			ModelMap modelMap){ 
+
+		if((birthdayService.availabality(date_of_arrival,venue)))  {
+			modelMap.addAttribute("error", "This Slot  is already booked, you can choose other date or venue");
 			return "birthdayparty";
-   }
-     else {
-    	 return	birthdayService.birthInsert( name_of_child, date_of_birth, venue, date_of_arrival, date_of_departure, decoration, material, cake, phoneno,modelMap);
-    }
-			}
+		}
+		else {
+			return	birthdayService.birthInsert( name_of_child, date_of_birth, venue, date_of_arrival, date_of_departure, decoration, material, cake, phoneno,modelMap);
+		}
+	}
 	@GetMapping("/abu")
 	public String cancle() {
 		return "cancel";
 	}
-	
+
 	//cancel booked event
-	  @RequestMapping(value="/birthday/cancleEvent/{phoneno}",
-	  method=RequestMethod.GET) public ModelAndView cancle(@PathVariable("phoneno")
-	  String phoneno) {
-		  System.out.println("Vivek");
-	  
-	  birthdayService.cancle1(phoneno);
-	  return new ModelAndView("/cancel-success");
-	  
-	  }
-	  
-	  //cancel booked user
-	  @RequestMapping(value="/birth/cancleEvent/{b_id}",
-			  method=RequestMethod.GET)
-	  public ModelAndView cancleBooked(@PathVariable("b_id") int b_id) {
-			  
-			  birthdayService.deleteBookedEvent(b_id); 
-			  return new ModelAndView("/cancel-success");
-			  
-			  }
- 
-	  @GetMapping("/ViewBookedUser")
-	  public String getAll(ModelMap modelMap) {
-		  return birthdayService.data(modelMap);
-	  }
+	@RequestMapping(value="/birthday/cancleEvent/{phoneno}",
+			method=RequestMethod.GET) 
+	public ModelAndView cancle(@PathVariable("phoneno") String phoneno) {
+
+		birthdayService.cancle1(phoneno);
+		return new ModelAndView("/cancel-success");
+
+	}
+
+	//cancel booked user
+	@RequestMapping(value="/birth/cancleEvent/{b_id}",
+			method=RequestMethod.GET)
+	public ModelAndView cancleBooked(@PathVariable("b_id") int b_id) {
+
+		birthdayService.deleteBookedEvent(b_id); 
+		return new ModelAndView("/cancel-success");
+
+	}
+
+	@GetMapping("/ViewBookedUser")
+	public String getAll(ModelMap modelMap) {
+		return birthdayService.data(modelMap);
+	}
 }

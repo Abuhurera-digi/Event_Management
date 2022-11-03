@@ -24,7 +24,7 @@ public class Company {
 	private Date date_of_arrival;
 	private Date date_of_departure;
 	private String phone_no;
-	
+
 	public String getPhone_no() {
 		return phone_no;
 	}
@@ -92,6 +92,6 @@ public class Company {
 				+ ", catering=" + catering + ", alcohol=" + alcohol + ", date_of_arrival=" + date_of_arrival
 				+ ", date_of_departure=" + date_of_departure + ", phone_no=" + phone_no + "]";
 	}
-	
-	
+
+
 }

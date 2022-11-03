@@ -17,8 +17,8 @@ import lombok.Setter;
 @Table
 @Data
 public class User {
-	
-	
+
+
 	@Column
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

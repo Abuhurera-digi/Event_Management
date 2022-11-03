@@ -20,9 +20,9 @@ public class CompanyService {
 
 	@Autowired
 	ComapnyRepository comapnyRepository;
-	
-	
-	
+
+
+
 	public void insert(HttpServletRequest request) throws ParseException {
 		Company company = new Company();
 		/*
@@ -31,8 +31,8 @@ public class CompanyService {
 		 */
 		company.setOrganization_name(request.getParameter("organization_name"));
 		company.setOrganizer_name(request.getParameter("organizer_name"));
-		
-		
+
+
 		int no_of_attendees=Integer.parseInt(request.getParameter("no_of_attendees"));
 		company.setNo_of_attendees(no_of_attendees);
 		int no_of_rooms= Integer.parseInt(request.getParameter("no_of_rooms"));
@@ -52,29 +52,29 @@ public class CompanyService {
 		System.out.println(company.getDate_of_arrival());
 
 		this.comapnyRepository.save(company); }
-	
-	
+
+
 	// check availabality
-		public boolean availabality(@RequestParam("date_of_arrival") Date date_of_arrival){
-		  Boolean status=false;
-		  List<Company> list = new ArrayList<>();
-		  comapnyRepository.findAll().forEach(x->list.add(x)); 
-		  System.out.println("coming");
-		  
-		  for(Company e:list) {
-			  Date d1=e.getDate_of_arrival();
-			  Date d2 = date_of_arrival;
-		  if(d1.compareTo(d2)==0) 
-		  {
-			  System.out.println(date_of_arrival);
-			  status=true;
-			  break;
-		  }
-		  
-		  }
-		  		return status;
-		  }
-		
-		
+	public boolean availabality(@RequestParam("date_of_arrival") Date date_of_arrival){
+		Boolean status=false;
+		List<Company> list = new ArrayList<>();
+		comapnyRepository.findAll().forEach(x->list.add(x)); 
+		System.out.println("coming");
+
+		for(Company e:list) {
+			Date d1=e.getDate_of_arrival();
+			Date d2 = date_of_arrival;
+			if(d1.compareTo(d2)==0) 
+			{
+				System.out.println(date_of_arrival);
+				status=true;
+				break;
+			}
+
+		}
+		return status;
+	}
+
+
 
 }

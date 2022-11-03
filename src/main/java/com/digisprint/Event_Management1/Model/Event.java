@@ -20,14 +20,14 @@ public class Event {
 	private int id;
 	private String eventname;
 	private String event_venue;
-    private Date event_date;
-    private String start_time;
-    private String end_time;
-    private String description;
-    private String event_guest;
-    private  byte[] photo;
-    private String base64photo;
-	
+	private Date event_date;
+	private String start_time;
+	private String end_time;
+	private String description;
+	private String event_guest;
+	private  byte[] photo;
+	private String base64photo;
+
 	public int getId() {
 		return id;
 	}
@@ -82,7 +82,7 @@ public class Event {
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
-	
+
 	public String getBase64photo() {
 		return base64photo;
 	}
@@ -110,10 +110,10 @@ public class Event {
 		this.photo = photo;
 	}
 	public Event() {
-		
+
 		// TODO Auto-generated constructor stub
 	}
 
-	
+
 
 }

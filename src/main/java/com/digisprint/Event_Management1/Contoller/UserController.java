@@ -71,19 +71,19 @@ public class UserController {
 	public String UserLogin() {
 		return "UserLogin";
 	}
-// no register with same number
+	// no register with same number
 	@GetMapping("/Create")
 	public String CreateAccount(@ModelAttribute("userForm") User user, Model model) {
-		
-		
-			return "UserRegister";
-		}
-		
-//		return "UserRegister";  
+
+
+		return "UserRegister";
+	}
+
+	//		return "UserRegister";  
 	//}
 	//inserting
 	@PostMapping("/addAdmin")
-	public String UserRegister(@ModelAttribute("userForm") User user,@RequestParam("name") String name,
+	public String userRegister(@ModelAttribute("userForm") User user,@RequestParam("name") String name,
 			@RequestParam("email_id")  String email_id ,
 			@RequestParam("college_name") String college_name,
 			@RequestParam("phoneno" ) String phoneno,
@@ -94,7 +94,7 @@ public class UserController {
 			, ModelMap modelMap, HttpServletRequest request) {
 		user1=userService.exitsPhoneno(phoneno);
 		if(user1==null) {
-				return userService.viewDetails(name, email_id, college_name, phoneno, password, gender, modelMap, request);
+			return userService.viewDetails(name, email_id, college_name, phoneno, password, gender, modelMap, request);
 		}
 		else {
 			modelMap.addAttribute("error", "This phone Number is already exits");
@@ -109,7 +109,7 @@ public class UserController {
 		if (Objects.nonNull(user1)) {
 			return "login-success";
 		} else {
-         model.addAttribute("error", "user not found");
+			model.addAttribute("error", "user not found");
 			return "UserLogin";
 		}
 
@@ -118,16 +118,16 @@ public class UserController {
 	@PostMapping("/pass")
 	public ModelAndView paasword(@ModelAttribute("user") User user) {
 		ModelAndView modelAndView = new ModelAndView("forpassword");
-		user4 = userService.forgetpass(user.getName(), user.getPhoneno());
+		user4 = userService.forgetPassword(user.getName(), user.getPhoneno());
 		System.out.println(user4);
 		if (Objects.nonNull(user4)) {
 			modelAndView.addObject("userForm", user4);
 			modelAndView.setViewName("/UserRegister");
 		}
 		return modelAndView;
-		}
+	}
 
-	
+
 
 	// delete
 	@RequestMapping(value = "/user/deleteStudent/{id}", method = RequestMethod.GET)
@@ -182,16 +182,7 @@ public class UserController {
 		}
 	}
 
-	// forgot password
-	@GetMapping("/viewPass")
-	public String seePassword(ModelMap model) {
-
-		model.put("user1", user4);
-		System.out.println("user4" + user4);
-		return "changePassword";
-
-	}
-//updating
+	//updating
 	@RequestMapping("/editUser/{id}")
 	public ModelAndView changePassword(@PathVariable("id") int id) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -201,16 +192,16 @@ public class UserController {
 		return modelAndView;
 
 	}
-//inserting after update
-@RequestMapping(value = "/abcdef", method = RequestMethod.POST)
+	//inserting after update
+	@RequestMapping(value = "/UpdateUser", method = RequestMethod.POST)
 	public ModelAndView add(@ModelAttribute("userForm") User user ) {
-		
-			userService.addUser(user);
-		
+
+		userService.addUser(user);
+
 		ModelAndView modelAndView = new ModelAndView("index");
 		return modelAndView;
 	}
-	
-	
+
+
 
 }

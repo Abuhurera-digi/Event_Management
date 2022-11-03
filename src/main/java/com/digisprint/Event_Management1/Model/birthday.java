@@ -14,29 +14,29 @@ import javax.persistence.Table;
 @Entity
 @Table(name="birthday")
 public class birthday {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
-	 private  int b_Id;
+	private  int b_Id;
 	@Column
-	 private String name_of_child;  
+	private String name_of_child;  
 	@Column
-	 private Date date_of_birth;
+	private Date date_of_birth;
 	@Column
-	 private String venue;
+	private String venue;
 	@Column
-	 private Date date_of_arrival;
+	private Date date_of_arrival;
 	@Column
-	 private Date date_of_departure; 
+	private Date date_of_departure; 
 	@Column
-	 private String decoration;
+	private String decoration;
 	@Column
-	 private String material;
+	private String material;
 	@Column
-	 private String cake;
+	private String cake;
 	@Column
-	 private String phoneno;
+	private String phoneno;
 	public int getB_Id() {
 		return b_Id;
 	}

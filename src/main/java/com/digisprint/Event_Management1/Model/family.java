@@ -78,7 +78,7 @@ public class family {
 	public void setDate_of_departure(Date date_of_departure) {
 		this.date_of_departure = date_of_departure;
 	}
-	
+
 	public String getPhoneno() {
 		return phoneno;
 	}
@@ -92,8 +92,8 @@ public class family {
 				+ ", date_of_arrival=" + date_of_arrival + ", date_of_departure=" + date_of_departure + ", phoneno="
 				+ phoneno + "]";
 	}
-	
-	
-	
-	
+
+
+
+
 }

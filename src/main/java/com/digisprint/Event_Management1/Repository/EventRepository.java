@@ -18,12 +18,10 @@ public interface EventRepository extends CrudRepository<Event, Integer>{
 
 	Event findByEventname(String eventname);
 
-    Event findById(int id);
-	
-	//Event findByDescription(String description);
+	Event findById(int id);
 
-	//Event findByEventName(String eventname);
-	
-	
+
+
+
 
 }
