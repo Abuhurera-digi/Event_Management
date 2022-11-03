@@ -28,7 +28,7 @@ background-image: url("images/AddEvents.jpg");
 <div class="container">
 
   <spring:url value="/addAdmin" var="addURL" />
-  <h2>Update Here/Register Here</h2>
+  <h2>Register Here</h2>
   <form:form modelAttribute="userForm" method="post" action="${addURL}" cssClass="form" >
    <form:hidden path="id"/>
    <div class="form-group">

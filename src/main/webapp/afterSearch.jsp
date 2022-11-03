@@ -29,7 +29,7 @@
 <tbody>
 
   <tr>
-    <td>${event_data.event_id}</td>
+    <td>${event_data.id}</td>
     <td>${event_data.eventname}</td>  
     <td>${event_data.event_venue}</td>
     <td>${event_data.event_date}</td>
