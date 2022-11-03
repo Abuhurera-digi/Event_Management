@@ -53,7 +53,7 @@ public class BirthdayController {
 	@RequestMapping(value="/birthday/cancleEvent/{phoneno}",
 			method=RequestMethod.GET) 
 	public ModelAndView cancle(@PathVariable("phoneno") String phoneno) {
-
+System.out.println("jkjkkkkkkkknm");
 		birthdayService.cancle1(phoneno);
 		return new ModelAndView("/cancel-success");
 
