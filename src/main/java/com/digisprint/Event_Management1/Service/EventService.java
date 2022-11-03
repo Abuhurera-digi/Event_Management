@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.digisprint.Event_Management1.EventManagement1Application;
 import com.digisprint.Event_Management1.Model.Event;
@@ -113,8 +114,9 @@ public class EventService implements EventService1 {
 
 
 	//fectching with image
-	public String displayEvent(ModelMap model) {
+	public ModelAndView displayEvent(ModelMap model) {
 		// TODO Auto-generated method stub
+		ModelAndView modelAndView = new ModelAndView("ViewEvents");
 		List<Event> list =new ArrayList<Event>();
 		eventRepository.findAll().forEach(i->list.add(i));
 		for(Event x:list)
@@ -128,17 +130,18 @@ public class EventService implements EventService1 {
 		}
 		model.addAttribute("result", list);
 
-		return "ViewEvents";
+		return modelAndView;
 	}
 
 
-	public String displayEvent1(ModelMap model) {
+	public ModelAndView displayEvent1(ModelMap model) {
 		// TODO Auto-generated method stub
+		ModelAndView modelAndView = new ModelAndView("userViewEvent");
 		List<Event> list =new ArrayList<Event>();
 		eventRepository.findAll().forEach(i->list.add(i));
 		model.addAttribute("result", list);
 
-		return "userViewEvent";
+		return modelAndView;
 	}
 	//updateing
 	//@Override

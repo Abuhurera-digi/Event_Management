@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,7 +28,7 @@ import com.digisprint.Event_Management1.Model.birthday;
 import com.digisprint.Event_Management1.Repository.EventRepository;
 import com.digisprint.Event_Management1.Service.EventService;
 
-@Controller
+@RestController
 public class EventContoller {
 	Admin user;
 	@Autowired
@@ -48,7 +49,7 @@ public class EventContoller {
 	}
 
 	@GetMapping("/Event")
-	public String displayEvent(ModelMap model) {
+	public ModelAndView displayEvent(ModelMap model) {
 
 
 		return eventService.displayEvent(model);
@@ -56,7 +57,7 @@ public class EventContoller {
 	}
 
 	@GetMapping("/Event1")
-	public String displayEvent1(ModelMap model) {
+	public ModelAndView displayEvent1(ModelMap model) {
 
 
 		return eventService.displayEvent1(model);

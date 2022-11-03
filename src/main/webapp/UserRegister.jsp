@@ -40,7 +40,7 @@ background-image: url("images/AddEvents.jpg");
 
    <div class="form-group">
     <label>Email Id</label>
-    <form:input path="email_id" cssClass="form-control" id="email_id" placeholder="Enter Your Email Id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+    <form:input path="email_id" cssClass="form-control" id="email_id" placeholder="Enter Your Email Id"  />
    </div>
    <br> <br>
    

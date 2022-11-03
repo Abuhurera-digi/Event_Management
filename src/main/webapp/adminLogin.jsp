@@ -19,6 +19,10 @@ background-image: url("images/adminimage.jpg");
 <fieldset style="width: 600px">
 
 <form action="adminlogin" method="post">
+
+ <c:if test="${not empty error}">
+  <h4>${error}</h4>
+  </c:if>
  Admin Name:<input type="text" name="name" placeholder="Enter your admin_name" required="required"> <br><br>
 
  Password<input type="password" name="password" placeholder="Enter your Password" required="required"> <br> <br>

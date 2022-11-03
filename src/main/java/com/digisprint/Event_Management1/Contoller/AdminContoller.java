@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.digisprint.Event_Management1.Model.Admin;
 import com.digisprint.Event_Management1.Model.User;
 import com.digisprint.Event_Management1.Service.AdminService;
 
-@Controller
+@RestController
 public class AdminContoller {
 
 	Admin admin1;
@@ -28,28 +29,31 @@ public class AdminContoller {
 	AdminService adminService;
 
 	@GetMapping("/Admin")
-	public String adminLogin() {
-		return "adminLogin";
+	public ModelAndView  adminLogin() {
+		ModelAndView modelAndView = new ModelAndView("adminLogin");
+		return modelAndView;
 	}
 
 	@GetMapping("/admincreate")
-	public String createAdmin() {
-		return "adminregister";
+	public ModelAndView createAdmin() {
+		ModelAndView modelAndView = new ModelAndView("adminregister");
+		return modelAndView;
 	}
 
 
 	@PostMapping("/adminlogin")
-	public String login(@ModelAttribute ("admin") Admin admin) 
+	public ModelAndView login(@ModelAttribute ("admin") Admin admin, ModelMap model) 
 	{
 		admin1 = adminService.login(admin.getname(), admin.getPassword());
-		//  System.out.println(admin1);
 		if(Objects.nonNull(admin1))
 		{
-			return "admin-login-success";
+			ModelAndView modelAndView = new ModelAndView("admin-login-success");
+			return modelAndView ;
 		}
 		else {
-
-			return "admin-login-error";
+				ModelAndView view = new ModelAndView("adminLogin");
+				model.addAttribute("error", "admin not found");
+			return view;
 		}
 
 
@@ -58,10 +62,11 @@ public class AdminContoller {
 
 	//your profile
 	@GetMapping("/yourprofile1")
-	public String yourProfile(ModelMap model) {
+	public ModelAndView yourProfile(ModelMap model) {
 		//checking
+		ModelAndView modelAndView = new ModelAndView("adminProfile");
 		model.put("admin", admin1);
-		return "adminProfile";
+		return modelAndView;
 	}
 
 

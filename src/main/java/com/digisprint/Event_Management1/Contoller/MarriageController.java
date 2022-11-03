@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.digisprint.Event_Management1.Model.Marriage;
 import com.digisprint.Event_Management1.Service.MarriageService;
 import com.digisprint.Event_Management1.Service.UserService;
 
-@Controller
+@RestController
 public class MarriageController {
 
 
@@ -30,18 +31,20 @@ public class MarriageController {
 
 
 	@PostMapping("/marriagebook")
-	public String value1(@RequestParam("venue") String venue,
+	public ModelAndView value1(@RequestParam("venue") String venue,
 			@RequestParam("date_of_arrival" ) Date date_of_arrival ,HttpServletRequest request,ModelMap modelMap) throws ParseException {
 
 
 
 		if((marriageService.availabality(date_of_arrival,venue)))  {
+			ModelAndView modelAndView = new ModelAndView("marriageparty");
 			modelMap.addAttribute("error", "This Slot  is already booked, you can choose other date or venue");
-			return "marriageparty ";
+			return modelAndView;
 		}
 		else {
+			ModelAndView View = new ModelAndView("marriageRegistersuccess");
 			marriageService.insert(request);  
-			return "marriageRegistersuccess";
+			return View;
 		}
 	} 
 

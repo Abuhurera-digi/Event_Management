@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.digisprint.Event_Management1.Model.Marriage;
 import com.digisprint.Event_Management1.Model.birthday;
@@ -32,7 +33,7 @@ public class BirthdayService {
 	@Autowired
 	FamilyRepository familyRepository;
 
-	public String birthInsert(
+	public ModelAndView birthInsert(
 			//@RequestParam("id")int id,
 			@RequestParam("name_of_child") String name_of_child,
 			@RequestParam("date_of_birth")  Date date_of_birth ,
@@ -47,6 +48,7 @@ public class BirthdayService {
 	{
 		birthday birthday=new birthday();
 		String status;
+		ModelAndView modelAndView = new ModelAndView("birthdayRegistersuccess");
 
 
 		//birthday.setId(id);
@@ -78,7 +80,7 @@ public class BirthdayService {
 
 
 
-		return "birthdayRegistersuccess";
+		return modelAndView;
 
 
 	}
@@ -94,7 +96,6 @@ public class BirthdayService {
 		Boolean status=false;
 		List<birthday> list = new ArrayList<>();
 		birthdayRepository.findAll().forEach(x->list.add(x)); 
-		System.out.println("coming");
 
 		for(birthday e:list) {
 			Date d1=e.getDate_of_arrival();
@@ -136,7 +137,8 @@ public class BirthdayService {
 	}
 
 	// BookEd user
-	public String data(ModelMap model) {
+	public ModelAndView data(ModelMap model) {
+		ModelAndView modelAndView = new ModelAndView( "ViewBookedUser");
 		List<birthday>user=new  ArrayList<>();
 		birthdayRepository.findAll().forEach(i->user.add(i));
 		List<Marriage> user1= new ArrayList<>();
@@ -149,7 +151,7 @@ public class BirthdayService {
 		model.addAttribute("result", user);
 		model.addAttribute("marriage", user1);
 		model.addAttribute("family", user2);
-		return "ViewBookedUser";
+		return modelAndView;
 	}
 
 	// cancel booked user

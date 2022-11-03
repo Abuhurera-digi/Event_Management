@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.digisprint.Event_Management1.Repository.birthdayRepository;
 import com.digisprint.Event_Management1.Service.BirthdayService;
-@Controller
+@RestController
 @Configuration
 @Component
 public class BirthdayController {
@@ -26,7 +27,7 @@ public class BirthdayController {
 	birthdayRepository birthdayRepository;
 
 	@PostMapping("/birthBook")
-	public String insertDetails(@RequestParam("name_of_child") String name_of_child,
+	public ModelAndView insertDetails(@RequestParam("name_of_child") String name_of_child,
 			@RequestParam("date_of_birth")  Date date_of_birth ,
 			@RequestParam("venue") String venue,
 			@RequestParam("date_of_arrival" ) Date date_of_arrival,
@@ -38,16 +39,18 @@ public class BirthdayController {
 			ModelMap modelMap){ 
 
 		if((birthdayService.availabality(date_of_arrival,venue)))  {
+			ModelAndView modelAndView = new ModelAndView("birthdayparty");
 			modelMap.addAttribute("error", "This Slot  is already booked, you can choose other date or venue");
-			return "birthdayparty";
+			return modelAndView;
 		}
 		else {
 			return	birthdayService.birthInsert( name_of_child, date_of_birth, venue, date_of_arrival, date_of_departure, decoration, material, cake, phoneno,modelMap);
 		}
 	}
 	@GetMapping("/abu")
-	public String cancle() {
-		return "cancel";
+	public ModelAndView cancle() {
+		ModelAndView modelAndView = new ModelAndView("cancel");
+		return modelAndView;
 	}
 
 	//cancel booked event
@@ -71,7 +74,7 @@ public class BirthdayController {
 	}
 
 	@GetMapping("/ViewBookedUser")
-	public String getAll(ModelMap modelMap) {
+	public ModelAndView getAll(ModelMap modelMap) {
 		return birthdayService.data(modelMap);
 	}
 }

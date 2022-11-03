@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.digisprint.Event_Management1.Model.Admin;
@@ -35,7 +36,7 @@ import com.digisprint.Event_Management1.Repository.birthdayRepository;
 import com.digisprint.Event_Management1.Service.AdminService;
 import com.digisprint.Event_Management1.Service.UserService;
 
-@Controller
+@RestController
 
 public class UserController {
 
@@ -48,8 +49,10 @@ public class UserController {
 	private MarriageRepository marriageRepository;
 	@Autowired
 	private FamilyRepository familyRepository;
+	
 	private UserService userService;
-	AdminService adminService;
+	
+	private AdminService adminService;
 
 	User user1= new User();
 	User user4;
@@ -62,55 +65,60 @@ public class UserController {
 	}
 
 	@RequestMapping("/")
-	public String FirstMapping() {
-
-		return "index";
+	public ModelAndView FirstMapping() {
+		ModelAndView modelAndView = new ModelAndView("index");
+		return modelAndView;
 	}
 
 	@GetMapping("/User1")
-	public String UserLogin() {
-		return "UserLogin";
+	public ModelAndView UserLogin() {
+		ModelAndView modelAndView = new ModelAndView("UserLogin");
+		return modelAndView;
 	}
 	// no register with same number
 	@GetMapping("/Create")
-	public String CreateAccount(@ModelAttribute("userForm") User user, Model model) {
+	public ModelAndView CreateAccount(@ModelAttribute("userForm") User user, Model model) {
+		ModelAndView modelAndView = new ModelAndView("UserRegister");
 
-
-		return "UserRegister";
+		return modelAndView;
 	}
 
 	//		return "UserRegister";  
 	//}
 	//inserting
 	@PostMapping("/addAdmin")
-	public String userRegister(@ModelAttribute("userForm") User user,@RequestParam("name") String name,
+	public ModelAndView userRegister(@ModelAttribute("userForm") User user,@RequestParam("name") String name,
 			@RequestParam("email_id")  String email_id ,
 			@RequestParam("college_name") String college_name,
 			@RequestParam("phoneno" ) String phoneno,
 			@RequestParam("password") String password,
-			//@RequestParam("passConfirm") String passConfirm,
 
 			@RequestParam("gender") String gender
 			, ModelMap modelMap, HttpServletRequest request) {
 		user1=userService.exitsPhoneno(phoneno);
 		if(user1==null) {
+			
 			return userService.viewDetails(name, email_id, college_name, phoneno, password, gender, modelMap, request);
 		}
 		else {
+			ModelAndView view = new ModelAndView("UserRegister");
 			modelMap.addAttribute("error", "This phone Number is already exits");
-			return "UserRegister";
+			return view;
 		}
 	}
 
 	@PostMapping("/login")
-	public String login(@ModelAttribute("user") User user,Model  model) {
+	public ModelAndView login(@ModelAttribute("user") User user,Model  model) {
+		
 		user1 = userService.login(user.getPhoneno(), user.getPassword());
 		System.out.println("user1" + user1);
 		if (Objects.nonNull(user1)) {
-			return "login-success";
+			ModelAndView modelAndView =new ModelAndView("login-success");
+			return modelAndView;
 		} else {
+			ModelAndView View =new ModelAndView("UserLogin");
 			model.addAttribute("error", "user not found");
-			return "UserLogin";
+			return View;
 		}
 
 	}
@@ -122,7 +130,7 @@ public class UserController {
 		System.out.println(user4);
 		if (Objects.nonNull(user4)) {
 			modelAndView.addObject("userForm", user4);
-			modelAndView.setViewName("/UserRegister");
+			modelAndView.setViewName("/updateUser");
 		}
 		return modelAndView;
 	}
@@ -139,16 +147,17 @@ public class UserController {
 	}
 
 	@GetMapping("/viewuser")
-	public String displayUser(ModelMap model) {
-
+	public ModelAndView displayUser(ModelMap model) {
+		//ModelAndView modelAndView = new ModelAndView();
 		return userService.displayUser(model);
 
 	}
 
 	// your profile
 	@GetMapping("/yourprofile")
-	public String yourProfile(ModelMap model) {
+	public ModelAndView yourProfile(ModelMap model) {
 
+		ModelAndView modelAndView = new ModelAndView("Pofile");
 		model.put("user", user1);
 
 		List<birthday> list = new ArrayList<>();
@@ -165,7 +174,7 @@ public class UserController {
 		model.put("marriage", user2);
 		model.put("family", user3);
 
-		return "Pofile";
+		return modelAndView;
 
 	}
 

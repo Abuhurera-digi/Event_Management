@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.digisprint.Event_Management1.Model.Company;
@@ -20,7 +21,7 @@ import com.digisprint.Event_Management1.Model.family;
 import com.digisprint.Event_Management1.Service.CompanyService;
 import com.digisprint.Event_Management1.Service.FamilyService;
 
-@Controller
+@RestController
 public class FamilyContoller {
 
 
@@ -28,7 +29,7 @@ public class FamilyContoller {
 	FamilyService familyService;
 
 	@PostMapping("/familyinsert")
-	public String Insert(HttpServletRequest
+	public ModelAndView Insert(HttpServletRequest
 			request, ModelMap modelMap) throws ParseException {
 
 
@@ -37,11 +38,13 @@ public class FamilyContoller {
 		Date date12=new SimpleDateFormat("yyyy-MM-dd").parse(date2);
 		family.setDate_of_arrival(date12);
 		if(familyService.availabality(date12)){
+			ModelAndView modelAndView = new ModelAndView("familyGettogether");
 			modelMap.addAttribute("error", "This Slot  is already booked, you can choose other date or venue");
-			return "familyGettogether";
+			return modelAndView;
 		}
-		familyService.insert(request); System.out.println("inserted"); 
-		return  "familyRegister";
+		ModelAndView View = new ModelAndView("familyRegister");
+		familyService.insert(request);  
+		return  View;
 
 
 

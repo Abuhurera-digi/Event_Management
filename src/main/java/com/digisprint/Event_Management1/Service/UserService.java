@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.digisprint.Event_Management1.Model.Admin;
 import com.digisprint.Event_Management1.Model.User;
@@ -34,7 +35,7 @@ public class UserService implements UserService1{
 		this.userRepository = userRepository;
 	}
 
-	public String viewDetails(
+	public ModelAndView viewDetails(
 			@RequestParam("name") String name,
 			@RequestParam("email_id")  String email_id ,
 			@RequestParam("college_name") String college_name,
@@ -43,6 +44,7 @@ public class UserService implements UserService1{
 
 			@RequestParam("gender") String gender
 			, ModelMap modelMap, HttpServletRequest request){ 
+		ModelAndView modelAndView = new ModelAndView("Register_success");
 		User user=new User();
 		user.setName(name);
 		user.setEmail_id(email_id);
@@ -57,7 +59,7 @@ public class UserService implements UserService1{
 		modelMap.put("phoneno", phoneno);
 		modelMap.put("password", password);
 		modelMap.put("gender", gender);
-		return "Register_success";
+		return modelAndView;
 	}
 
 
@@ -82,17 +84,19 @@ public class UserService implements UserService1{
 
 	@Override
 	public void deleteEvent(int id) {
+		
 		userRepository.deleteById(id);
 	}
 
 
-	public String displayUser(ModelMap model) {
+	public ModelAndView displayUser(ModelMap model) {
 		// TODO Auto-generated method stub
+		ModelAndView modelAndView = new ModelAndView("viewuser");
 		List<User>list=new ArrayList<User>();
 		userRepository.findAll().forEach(i->list.add(i));
 		model.addAttribute("result", list);
 
-		return "viewuser";
+		return modelAndView;
 	}
 
 
