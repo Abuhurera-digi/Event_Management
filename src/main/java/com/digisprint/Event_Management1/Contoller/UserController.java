@@ -83,8 +83,7 @@ public class UserController {
 		return modelAndView;
 	}
 
-	//		return "UserRegister";  
-	//}
+	
 	//inserting
 	@PostMapping("/addAdmin")
 	public ModelAndView userRegister(@ModelAttribute("userForm") User user,@RequestParam("name") String name,

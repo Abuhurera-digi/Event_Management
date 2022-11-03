@@ -47,11 +47,7 @@ public class BirthdayController {
 			return	birthdayService.birthInsert( name_of_child, date_of_birth, venue, date_of_arrival, date_of_departure, decoration, material, cake, phoneno,modelMap);
 		}
 	}
-//	@GetMapping("/abu")
-//	public ModelAndView cancle() {
-//		ModelAndView modelAndView = new ModelAndView("cancel");
-//		return modelAndView;
-//	}
+
 
 	//cancel booked event
 	@RequestMapping(value="/birthday/cancleEvent/{phoneno}",

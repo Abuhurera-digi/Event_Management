@@ -63,7 +63,6 @@ public class FamilyContoller {
 			String  phoneno) {
 
 		familyService.deleteBookedEvent(phoneno); 
-		System.out.println("Coming");
 		return new ModelAndView("/cancel-success");
 
 	}

@@ -80,7 +80,6 @@ public class FamilyService {
 	public void deleteBookedEvent(String phoneno) {
 
 		familyRepository.deleteByPhoneno(phoneno);
-		System.out.println("Coming");
 	}
 
 }
