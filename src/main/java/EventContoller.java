@@ -40,6 +40,8 @@ public class EventContoller {
 
 	@PostMapping("/event")
 	  public ModelAndView detatils(HttpServletRequest request, @RequestParam("photo") MultipartFile file, ModelMap map) throws  UnsupportedEncodingException, ParseException{
+
+System.out.println("abu");
 			 
 		eventService.insert(request,file,directory);
 		ModelAndView modelAndView = new ModelAndView("ViewEvents");
